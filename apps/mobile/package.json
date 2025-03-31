@@ -1,0 +1,42 @@
+{
+  "name": "@repo/mobile",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "dev": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint .",
+    "fullclean": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "@repo/ui": "workspace:*",
+    "@tanstack/react-query": "^5.71.0",
+    "@trpc/client": "^11.0.1",
+    "@trpc/react-query": "^11.0.1",
+    "expo": "~52.0.41",
+    "expo-status-bar": "~2.0.1",
+    "react": "19.1.0",
+    "react-native": "0.78.1",
+    "react-native-safe-area-context": "5.3.0",
+    "socket.io-client": "^4.8.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "~19.0.12",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^4.1.0",
+    "typescript": "^5.8.2"
+  }
+}

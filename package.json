@@ -1,0 +1,33 @@
+{
+  "name": "football-trivia",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "dev:web": "turbo dev --filter=@repo/web --filter=@repo/ui --filter=@repo/api",
+    "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui --filter=@repo/backend",
+    "dev:backend": "turbo dev --filter=@repo/backend",
+    "db:setup": "tsx scripts/setup-backend-env.ts",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "fullclean": "turbo fullclean && rm -rf node_modules && rm pnpm-lock.yaml"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^2.4.4",
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "tsx": "^4.7.1",
+    "prompts": "^2.4.2",
+    "@types/prompts": "^2.4.9"
+  },
+  "packageManager": "pnpm@9.14.2",
+  "pnpm": {
+    "overrides": {
+      "next": "^15.0.0"
+    }
+  },
+  "dependencies": {
+    "superjson": "^2.2.2"
+  }
+}

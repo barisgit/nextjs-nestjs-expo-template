@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@source "./";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  .dark {
+    --color-background-default: var(--color-dark-background-default);
+    --color-background-paper: var(--color-dark-background-paper);
+    --color-background-level1: var(--color-dark-background-level1);
+    --color-background-level2: var(--color-dark-background-level2);
+    --color-background-level3: var(--color-dark-background-level3);
+    --color-background-light: var(--color-dark-background-light);
+    --color-background-dark: var(--color-dark-background-dark);
+    --color-text-primary: var(--color-dark-text-primary);
+    --color-text-secondary: var(--color-dark-text-secondary);
+    --color-text-accent: var(--color-dark-text-accent);
+    --color-border-default: var(--color-dark-border-default);
+    --color-border-light: var(--color-dark-border-light);
+    --color-border-dark: var(--color-dark-border-dark);
+    --color-border-accent: var(--color-dark-border-accent);
+    --color-scrollbar-track: var(--color-dark-scrollbar-track);
+    --color-scrollbar-thumb: var(--color-dark-scrollbar-thumb);
+
+    /* Update card, popover, and code colors for dark mode */
+    --color-card: var(--color-background-level1);
+    --color-card-muted: var(--color-background-level2);
+    --color-card-hover: var(--color-background-level2);
+    --color-card-active: var(--color-background-level3);
+    --color-card-foreground: var(--color-text-primary);
+
+    --color-popover: var(--color-background-level1);
+    --color-popover-foreground: var(--color-text-primary);
+
+    --color-code: #1e1e1e;
+    --color-code-foreground: #e0e0e0;
+
+    /* Update markdown-specific colors for dark mode */
+    --color-markdown-h1: var(--color-primary-400);
+    --color-markdown-h2: var(--color-accent-400);
+    --color-markdown-h3: var(--color-secondary-400);
+    --color-markdown-h4: var(--color-dark-text-secondary);
+    --color-markdown-text: var(--color-dark-text-primary);
+    --color-markdown-link: var(--color-primary-400);
+    --color-markdown-codebg: var(--color-dark-code);
+    --color-markdown-codetext: var(--color-dark-code-foreground);
+    --color-markdown-inlinecodebg: var(--color-dark-inline-code);
+    --color-markdown-inlinecodetext: var(--color-dark-inline-code-foreground);
+    --color-markdown-blockquote: var(--color-muted-foreground);
+    --color-markdown-listmarker: var(--color-primary-400);
+
+    /* Update input colors for dark mode */
+    --color-input: var(--color-background-level1);
+    --color-input-hover: var(--color-background-level2);
+    --color-input-focus: var(--color-background-level2);
+  }
+}

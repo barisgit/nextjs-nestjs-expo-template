@@ -4,7 +4,9 @@
   "private": true,
   "files": [
     "node.js",
-    "next.js"
+    "next.js",
+    "react.js",
+    "react-native.js"
   ],
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -12,6 +14,7 @@
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "@vercel/style-guide": "^6.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-turbo": "^2.4.4",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",

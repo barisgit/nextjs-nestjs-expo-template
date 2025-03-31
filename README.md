@@ -15,7 +15,7 @@ A modern trivia application focused on football (soccer) knowledge with real-tim
 
 ## Project Structure
 
-```
+```text
 apps/
   ├── backend (NestJS API)
   ├── web (Next.js Web App)
@@ -67,4 +67,4 @@ packages/
 
 ## Development
 
-This project uses a Turborepo monorepo structure with TypeScript throughout the stack. 
+This project uses a Turborepo monorepo structure with TypeScript throughout the stack.

@@ -4,8 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@repo/ui/*": ["../ui/src/*"],
-      "@repo/api/*": ["../api/*"],
-      "@/*": ["../web/src/*"]
+      "@repo/api/*": ["../api/*"]
     },
     "declaration": true,
     "declarationMap": true,
@@ -20,6 +19,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true
   }
 }

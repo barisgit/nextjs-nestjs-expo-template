@@ -8,8 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint .",
-    "fullclean": "rm -rf node_modules"
+    "lint": "expo lint",
+    "fullclean": "rm -rf node_modules && rm -rf .turbo && rm -rf .expo"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
@@ -31,7 +31,8 @@
     "@types/react": "~19.0.12",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
-    "eslint": "^9.23.0",
+    "eslint": "^8.57.1",
+    "eslint-config-expo": "~8.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.34.0",

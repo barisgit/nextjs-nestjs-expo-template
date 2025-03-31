@@ -11,5 +11,8 @@
     "react-library.json",
     "react-native.json",
     "next.json"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
 }

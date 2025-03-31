@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type VariantProps } from "class-variance-authority";
 
 import { cn } from "@repo/ui/lib/utils";
-import { Button, buttonVariants } from "@/components/base/button";
+import { Button, buttonVariants } from "@repo/ui/components/base/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

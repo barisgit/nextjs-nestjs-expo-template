@@ -268,7 +268,7 @@ importers:
         version: 15.2.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       posthog-js:
         specifier: ^1.234.1
-        version: 1.234.5
+        version: 1.234.6
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -278,6 +278,9 @@ importers:
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
+      sonner:
+        specifier: ^2.0.3
+        version: 2.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       superjson:
         specifier: ^2.2.2
         version: 2.2.2
@@ -496,10 +499,10 @@ importers:
         specifier: ^2.15.1
         version: 2.15.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       sonner:
-        specifier: ^2.0.2
+        specifier: ^2.0.3
         version: 2.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-merge:
-        specifier: ^3.0.2
+        specifier: ^3.1.0
         version: 3.1.0
       vaul:
         specifier: ^1.1.2
@@ -7273,8 +7276,8 @@ packages:
     resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
     engines: {node: '>=0.10.0'}
 
-  posthog-js@1.234.5:
-    resolution: {integrity: sha512-c5VUTyEjJMu2E/yp80/z2PAbJQDxaWfbZc5/mdB/2GD/bTnbkYnlpKz91C2pn4/w2LeWJkqMq8cSt3YOo+X+rw==}
+  posthog-js@1.234.6:
+    resolution: {integrity: sha512-Hu3fbcWf2oCGoj26uh13GQbW+BJ8230rz2UMOMFUGNZ+/ha/qR+Xfyl+3IgjvSL4ikWDVkCpjFQntGb81qtCUg==}
     peerDependencies:
       '@rrweb/types': 2.0.0-alpha.17
       rrweb-snapshot: 2.0.0-alpha.17
@@ -17048,7 +17051,7 @@ snapshots:
     dependencies:
       xtend: 4.0.2
 
-  posthog-js@1.234.5:
+  posthog-js@1.234.6:
     dependencies:
       core-js: 3.41.0
       fflate: 0.4.8
@@ -17662,7 +17665,7 @@ snapshots:
 
   send@1.2.0:
     dependencies:
-      debug: 4.4.0
+      debug: 4.3.6
       encodeurl: 2.0.0
       escape-html: 1.0.3
       etag: 1.8.1

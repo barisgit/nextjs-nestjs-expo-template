@@ -1,0 +1,25 @@
+{
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.scss": "tailwindcss"
+  },
+  "eslint.workingDirectories": [
+    { "directory": "apps/web", "changeProcessCwd": true },
+    { "directory": "apps/mobile", "changeProcessCwd": true },
+    { "directory": "packages/ui", "changeProcessCwd": true },
+    { "directory": "packages/config/*", "changeProcessCwd": true },
+    { "directory": "packages/tsconfig", "changeProcessCwd": true },
+    { "directory": "packages/eslint-config", "changeProcessCwd": true }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.suggest.paths": true,
+  "javascript.suggest.paths": true,
+  "javascript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always"
+}

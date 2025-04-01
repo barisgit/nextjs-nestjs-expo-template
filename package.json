@@ -1,11 +1,11 @@
 {
-  "name": "football-trivia",
+  "name": "app-template",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "dev:web": "turbo dev --filter=@repo/web --filter=@repo/ui",
-    "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui --filter=@repo/backend",
+    "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui",
     "dev:backend": "turbo dev --filter=@repo/backend",
     "db:setup": "tsx scripts/setup-backend-env.ts",
     "lint": "turbo lint",

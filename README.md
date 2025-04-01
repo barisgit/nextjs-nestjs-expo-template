@@ -1,6 +1,6 @@
-# Football Trivia App
+# App Template
 
-A modern trivia application focused on football (soccer) knowledge with real-time multiplayer features.
+A modern application template with real-time multiplayer features.
 
 ## Tech Stack
 
@@ -38,8 +38,8 @@ packages/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/football-trivia.git
-   cd football-trivia
+   git clone https://github.com/yourusername/app-template.git
+   cd app-template
    ```
 
 2. Install dependencies:
@@ -59,9 +59,9 @@ packages/
 
 ## Features
 
-- Real-time multiplayer trivia games
+- Real-time multiplayer features (example: collaborative editing, games)
 - User authentication and profiles
-- Leaderboards and scoring system
+- Leaderboards and scoring system (example)
 - Premium content through subscription model
 - Mobile companion app
 

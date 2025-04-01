@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Football Trivia",
-    "slug": "football-trivia",
+    "name": "App Name",
+    "slug": "app-slug",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",

@@ -14,7 +14,7 @@ const dbDefaults = {
   host: "localhost",
   port: 5432,
   username: "postgres",
-  database: "football_trivia",
+  database: "app_db",
 };
 
 function isDockerRunning(): boolean {
@@ -130,7 +130,7 @@ async function setupBackendEnv() {
       type: "confirm",
       name: "manageDocker",
       message:
-        "�� Docker seems to be running. Do you want to use Docker to manage the PostgreSQL database (Postgres 17)?",
+        "Docker seems to be running. Do you want to use Docker to manage the PostgreSQL database (Postgres 17)?",
       initial: true,
     });
     useDocker = manageDocker;

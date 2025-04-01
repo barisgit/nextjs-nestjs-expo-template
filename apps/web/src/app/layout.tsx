@@ -1,11 +1,11 @@
-import "../styles/globals.css";
+import type { Metadata } from "next";
 import "@repo/ui/styles.css";
 import { type JSX } from "react";
 import { TRPCProvider } from "../providers/trpc-provider";
 
-export const metadata = {
-  title: "Footy Mastermind",
-  description: "A football trivia game",
+export const metadata: Metadata = {
+  title: "App Title",
+  description: "A web application",
 };
 
 export default function RootLayout({

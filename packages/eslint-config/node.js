@@ -5,6 +5,7 @@ const typescriptEslint = require("@typescript-eslint/eslint-plugin");
 const typescriptParser = require("@typescript-eslint/parser");
 const importPlugin = require("eslint-plugin-import");
 const turboPlugin = require("eslint-plugin-turbo");
+const globals = require("globals"); // Import globals package
 
 // Resolve tsconfig relative to the package consuming this config
 const project = resolve(process.cwd(), "tsconfig.json");
@@ -23,6 +24,11 @@ module.exports = [
       parser: typescriptParser,
       parserOptions: {
         project: true, // Assumes tsconfig.json in consumer package root
+      },
+      globals: {
+        // Add Node.js globals
+        ...globals.node,
+        __dirname: "readonly", // Also explicitly add __dirname if needed
       },
     },
     settings: {

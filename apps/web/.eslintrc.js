@@ -3,6 +3,21 @@ module.exports = {
   extends: ["@repo/eslint-config/next.js"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: true,
+    project: ["./tsconfig.json"],
+    tsconfigRootDir: __dirname,
   },
-}
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: "tsconfig.json",
+        alwaysTryTypes: true,
+      },
+    },
+  },
+  overrides: [
+    {
+      files: ["*.js", "*.jsx", "*.mjs", "*.cjs"],
+      extends: ["plugin:@typescript-eslint/disable-type-checked"],
+    },
+  ],
+};

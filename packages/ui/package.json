@@ -15,7 +15,7 @@
     "dev": "tailwindcss -i ./src/styles/default.css -o ./dist/styles.css --watch",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
-    "fullclean": "rm -rf dist && rm -rf node_modules"
+    "fullclean": "rm -rf dist && rm -rf node_modules && rm -rf .turbo"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",

@@ -6,11 +6,11 @@ const baseConfig = require("@repo/eslint-config/react.js");
 module.exports = [
   ...baseConfig,
   // Add UI-package-specific overrides here using the flat config format
-  // Example: Maybe relaxing a rule for storybook files
-  // {
-  //   files: ["stories/**/*.tsx"],
-  //   rules: {
-  //     "some-rule-to-relax": "warn"
-  //   }
-  // }
+  {
+    // Disable Next.js specific rule about linking to pages since this is a library
+    files: ["src/**/*.ts?(x)"], // Apply only to ts/tsx files in src
+    rules: {
+      "@next/next/no-html-link-for-pages": "off",
+    },
+  },
 ];

@@ -45,7 +45,3 @@ yarn-error.log*
 *.mobileprovision
 *.orig.*
 web-build/
-
-# IDE
-.idea
-.vscode

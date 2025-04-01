@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "fullclean": "rm -rf node_modules && rm -rf .turbo && rm -rf .expo"
+    "fullclean": "rm -rf node_modules && rm -rf .turbo && rm -rf .expo",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",

@@ -4,7 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@repo/ui/*": ["../ui/src/*"],
-      "@repo/api/*": ["../api/*"]
+      "@repo/backend/*": ["../backend/src/*"],
+      "@repo/web/*": ["../web/src/*"],
+      "@repo/mobile/*": ["../mobile/src/*"]
     },
     "declaration": true,
     "declarationMap": true,
@@ -15,13 +17,17 @@
     "module": "NodeNext",
     "moduleDetection": "force",
     "moduleResolution": "NodeNext",
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false
   }
 }

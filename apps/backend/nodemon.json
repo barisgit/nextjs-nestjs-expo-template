@@ -1,0 +1,6 @@
+{
+  "watch": ["src/trpc"],
+  "ext": "ts",
+  "ignore": ["src/trpc/@generated/**/*"],
+  "exec": "tsx scripts/generate-trpc-types.ts"
+}

@@ -1,23 +1,26 @@
 /**
  * Type definitions for tRPC components.
- * These are utility types used internally by the implementation.
- *
- * Note: For client usage, import types from generated-router-type-export.ts instead.
+ * Helps avoid the "cannot be named without reference" TypeScript errors.
  */
-import type { AnyRouter } from "@trpc/server";
-import type { AppRouter } from "./@generated/generated-router-type.js";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { Router } from "@trpc/server/unstable-core-do-not-import";
 
-// Re-export the AnyRouter type for internal use
-export type { AnyRouter };
+// Type for routers - eliminates the need for explicit types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyTRPCRouter = Router<any, any>;
 
-// Generic router input type - for internal use
-export type RouterInput<TRouter extends AnyRouter> = inferRouterInputs<TRouter>;
+// Type for middleware functions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyMiddleware = any;
 
-// Generic router output type - for internal use
-export type RouterOutput<TRouter extends AnyRouter> =
+// Type for procedures
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyProcedure = any;
+
+// Generic router input type
+export type RouterInput<TRouter extends AnyTRPCRouter> =
+  inferRouterInputs<TRouter>;
+
+// Generic router output type
+export type RouterOutput<TRouter extends AnyTRPCRouter> =
   inferRouterOutputs<TRouter>;
-
-// Specific input/output types for the generated router - for internal use
-export type AppRouterInput = RouterInput<AppRouter>;
-export type AppRouterOutput = RouterOutput<AppRouter>;

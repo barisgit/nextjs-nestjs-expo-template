@@ -54,7 +54,11 @@ async function generateTrpcTypes() {
     const routerDefinition = generateRouterDefinition(procedures);
 
     // Write to file
-    const outputPath = path.resolve(sourceDir, "generated-router-type.ts");
+    const outputPath = path.resolve(
+      sourceDir,
+      "@generated",
+      "generated-router-type.ts"
+    );
     fs.writeFileSync(outputPath, routerDefinition);
 
     console.log(`Router type definition generated at ${outputPath}`);

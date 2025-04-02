@@ -1,12 +1,11 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../auth/auth.service.js";
 import { Request, Response } from "express";
-import { AppRouter } from "./routers";
-import { AuthData, TRPCContext } from "./context";
-import { AnyRouter } from "@trpc/server";
-import { AnyTRPCRouter } from "./types";
+import { AppRouter } from "./routers/index.js";
+import { AuthData, TRPCContext } from "./context/index.js";
+import { type AppRouter as AppRouterType } from "./@generated/generated-router-type.js";
 
 @Injectable()
 export class TRPCService {
@@ -89,23 +88,17 @@ export class TRPCService {
   }
 
   // Get the router instance
-  public get router(): AnyTRPCRouter {
+  public get router() {
     return this.appRouterService.router;
-  }
-
-  // Type helper for client usage
-  public getRouterType(): AnyTRPCRouter {
-    return this.appRouterService.getRouterType();
   }
 
   // Apply middleware to NestJS app
   applyMiddleware(app: NestExpressApplication) {
     this.logger.log("Applying tRPC middleware to NestJS application");
-    // Use type assertion to fix compatibility issue with tRPC v11
     app.use(
       "/trpc",
       createExpressMiddleware({
-        router: this.router as unknown as AnyRouter,
+        router: this.router as AppRouterType,
         createContext: ({ req, res }) => this.createContext({ req, res }),
       })
     );

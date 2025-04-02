@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/base/button";
 import { type JSX } from "react";
+import { HelloExample } from "@/components/examples/hello-example";
 
 export default function Home(): JSX.Element {
   const { isSignedIn } = useAuth();
@@ -42,6 +43,11 @@ export default function Home(): JSX.Element {
           ) : (
             <p>Sign in to access protected routes and view your profile</p>
           )}
+        </div>
+
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">tRPC Example</h2>
+          <HelloExample />
         </div>
       </div>
 

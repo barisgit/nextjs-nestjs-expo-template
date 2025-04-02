@@ -1,11 +1,15 @@
 import { Logger } from "@nestjs/common";
 import { initTRPC, TRPCError } from "@trpc/server";
-import { TRPCContext } from "../../context";
-import { AnyMiddleware } from "../../types";
+import { TRPCContext } from "../../context/index.js";
+import { AnyMiddleware } from "../../types.js";
+import superjson from "superjson";
+
 const logger = new Logger("TRPCBaseRouter");
 
 // Initialize tRPC
-export const t = initTRPC.context<TRPCContext>().create();
+export const t = initTRPC.context<TRPCContext>().create({
+  transformer: superjson,
+});
 
 // Create middleware to check authentication
 export const isAuthed = t.middleware(({ ctx, next, path }): AnyMiddleware => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Button } from "./Button";
 
@@ -29,7 +29,7 @@ export const UserProfile = ({ userId, onRefresh }: UserProfileProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadUser = async () => {
+  const loadUser = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -43,12 +43,12 @@ export const UserProfile = ({ userId, onRefresh }: UserProfileProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   useEffect(() => {
     console.log("UserProfile mounted, loading user...");
     loadUser();
-  }, [userId]);
+  }, [userId, loadUser]);
 
   const handleRefresh = () => {
     console.log("Refreshing user data...");

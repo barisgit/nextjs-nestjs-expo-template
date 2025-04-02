@@ -1,6 +1,6 @@
 import { All, Controller, Logger } from "@nestjs/common";
 import { renderTrpcPanel } from "trpc-ui";
-import { TRPCService } from "./trpc.service";
+import { TRPCService } from "./trpc.service.js";
 
 @Controller()
 export class TRPCPanelController {

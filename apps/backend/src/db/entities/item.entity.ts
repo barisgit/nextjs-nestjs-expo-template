@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import { UserItem } from "./user-item.entity";
+import type { UserItem } from "./user-item.entity.js";
 
 export enum ItemStatus {
   PENDING = "pending",
@@ -39,6 +39,6 @@ export class Item {
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 
-  @OneToMany(() => UserItem, (userItem) => userItem.item)
+  @OneToMany("UserItem", (userItem: UserItem) => userItem.item)
   userItems: UserItem[];
 }

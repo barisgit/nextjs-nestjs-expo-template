@@ -1,24 +1,29 @@
 {
   "name": "@repo/typescript-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "license": "MIT",
+  "type": "module",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-library.json"
+  ],
+  "devDependencies": {
+    "@tsconfig/node-lts": "latest",
+    "typescript": "^5.4.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.4.3"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "base.json",
-    "react-library.json",
-    "react-native.json",
-    "next.json"
-  ],
-  "devDependencies": {
-    "eslint": "^8.57.0"
-  },
-  "exports": {
-    "./base": "./base.json",
-    "./react-library": "./react-library.json",
-    "./react-native": "./react-native.json",
-    "./nextjs": "./nextjs.json"
+  "dependenciesMeta": {
+    "@tsconfig/node-lts": {
+      "built": false
+    },
+    "typescript": {
+      "built": false
+    }
   }
 }

@@ -1,13 +1,12 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { z } from "zod";
-import { procedure, protectedProcedure, t } from ".";
-import { AnyTRPCRouter } from "../../types";
+import { procedure, protectedProcedure, t } from "../base/index.js";
 
 @Injectable()
 export class BasicRouter {
   private readonly logger = new Logger(BasicRouter.name);
 
-  public readonly router: AnyTRPCRouter = t.router({
+  public readonly router = t.router({
     // Hello endpoint - public
     hello: procedure
       .input(

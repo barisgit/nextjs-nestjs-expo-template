@@ -1,9 +1,9 @@
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
+import { AppModule } from "./app.module.js";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { TRPCService } from "./trpc/trpc.service";
+import { TRPCService } from "./trpc/trpc.service.js";
 
 async function bootstrap() {
   // Create the application with verbose logging
@@ -16,7 +16,6 @@ async function bootstrap() {
 
   // Get ConfigService instance
   const configService = app.get(ConfigService);
-
   // Enable ValidationPipe globally (optional but recommended for request validation)
   app.useGlobalPipes(new ValidationPipe());
 

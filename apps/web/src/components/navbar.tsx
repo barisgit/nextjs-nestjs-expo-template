@@ -1,9 +1,11 @@
 "use client";
 
+import React, { type JSX } from "react";
 import Link from "next/link";
 import { UserButton, SignInButton, SignUpButton, useAuth } from "@clerk/nextjs";
+import { Button } from "@repo/ui/components/base/button";
 
-export function Navbar() {
+export function Navbar(): JSX.Element {
   const { isSignedIn } = useAuth();
 
   return (
@@ -28,12 +30,20 @@ export function Navbar() {
           ) : (
             <>
               <SignInButton mode="modal">
-                <button className="hover:underline">Sign In</button>
+                <Button
+                  variant="ghost"
+                  className="hover:underline hover:text-white"
+                >
+                  Sign In
+                </Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <button className="bg-white text-primary px-3 py-1 rounded hover:bg-opacity-90">
+                <Button
+                  variant="ghost"
+                  className="hover:underline hover:text-white"
+                >
                   Sign Up
-                </button>
+                </Button>
               </SignUpButton>
             </>
           )}

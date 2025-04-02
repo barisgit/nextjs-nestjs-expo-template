@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AppModule } from "./app.module";
 import { describe, it, expect, beforeEach, afterEach } from "@jest/globals";
 import { INestApplication } from "@nestjs/common";
+import { AppModule } from "./app.module.js";
 
 describe("AppModule", () => {
   let app: INestApplication;

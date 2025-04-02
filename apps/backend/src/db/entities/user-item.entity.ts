@@ -7,22 +7,22 @@ import {
   UpdateDateColumn,
   Column,
 } from "typeorm";
-import { Item } from "./item.entity";
-import { User } from "./user.entity";
+import { Item } from "./item.entity.js";
+import { User } from "./user.entity.js";
 
 @Entity("user_items")
 export class UserItem {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => Item, (item) => item.userItems, { onDelete: "CASCADE" })
+  @ManyToOne("Item", (item: Item) => item.userItems, { onDelete: "CASCADE" })
   @JoinColumn({ name: "item_id" })
   item: Item;
 
   @Column({ name: "item_id" })
   itemId: string;
 
-  @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
+  @ManyToOne("User", { eager: true, onDelete: "CASCADE" })
   @JoinColumn({ name: "user_id" })
   user: User;
 

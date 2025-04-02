@@ -1,12 +1,11 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { DatabaseModule } from "./db/database.module";
-// import { QuestionsModule } from "./questions/questions.module"; // KEEP commented out
-import { AppConfigModule } from "./config/app-config.module";
-import { AuthModule } from "./auth/auth.module";
+import { DatabaseModule } from "./db/database.module.js";
+import { AppConfigModule } from "./config/app-config.module.js";
+import { AuthModule } from "./auth/auth.module.js";
 // Import our new tRPC module instead of nestjs-trpc
-import { TRPCModule } from "./trpc/trpc.module";
-import { TRPCPanelController } from "./trpc/trpc-panel.controller";
+import { TRPCModule } from "./trpc/trpc.module.js";
+import { TRPCPanelController } from "./trpc/trpc-panel.controller.js";
 
 @Module({
   imports: [

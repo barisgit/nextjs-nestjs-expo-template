@@ -1,9 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { AuthService } from "../../../auth/auth.service";
-import { procedure, protectedProcedure, t } from "../base";
-import { AnyTRPCRouter } from "../../types";
+import { AuthService } from "../../../auth/auth.service.js";
+import { procedure, protectedProcedure, t } from "../base/index.js";
 
 @Injectable()
 export class AuthRouter {
@@ -11,7 +10,7 @@ export class AuthRouter {
 
   constructor(private readonly authService: AuthService) {}
 
-  public readonly router: AnyTRPCRouter = t.router({
+  public readonly router = t.router({
     // Get current user (public endpoint but returns auth state)
     getUser: procedure.query(({ ctx }) => {
       return {

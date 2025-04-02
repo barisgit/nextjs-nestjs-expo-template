@@ -1,13 +1,15 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { type ReactNode, type JSX } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 
 interface ClerkProviderProps {
   children: ReactNode;
 }
 
-export function CustomClerkProvider({ children }: ClerkProviderProps) {
+export function CustomClerkProvider({
+  children,
+}: ClerkProviderProps): JSX.Element {
   return (
     <ClerkProvider
       appearance={{

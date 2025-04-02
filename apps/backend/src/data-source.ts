@@ -1,12 +1,18 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { config } from "dotenv";
-import { User } from "./db/entities/user.entity";
-import { Item } from "./db/entities/item.entity";
-import { ItemDetail } from "./db/entities/item-detail.entity";
-import { UserItem } from "./db/entities/user-item.entity";
+import { User } from "./db/entities/user.entity.js";
+import { Item } from "./db/entities/item.entity.js";
+import { ItemDetail } from "./db/entities/item-detail.entity.js";
+import { UserItem } from "./db/entities/user-item.entity.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Calculate __dirname equivalent for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables from .env file
-config({ path: ".env" }); // Assuming .env is in apps/backend root relative to execution
+config({ path: path.join(__dirname, "..", ".env") }); // Ensure .env is loaded relative to dist/src
 
 export const dataSourceOptions: DataSourceOptions = {
   type: "postgres",
@@ -16,7 +22,7 @@ export const dataSourceOptions: DataSourceOptions = {
   password: process.env.DB_PASSWORD || "postgres",
   database: process.env.DB_DATABASE || "app_db",
   entities: [User, Item, ItemDetail, UserItem],
-  migrations: [__dirname + "/db/migrations/*.{js,ts}"], // Adjusted path for migrations
+  migrations: [path.join(__dirname, "db", "migrations", "*.{js,ts}")], // Use path.join for cross-platform compatibility
   synchronize: false, // Should be false when using migrations
   logging: process.env.NODE_ENV !== "production",
 };

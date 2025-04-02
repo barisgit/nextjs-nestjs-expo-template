@@ -602,7 +602,7 @@ export function AllComponentsDemo(): React.JSX.Element {
               <Carousel className="w-full">
                 <CarouselContent>
                   {Array.from({ length: 3 }).map((_, index) => (
-                    <CarouselItem key={index}>
+                    <CarouselItem key={Number(index)}>
                       <div className="p-1">
                         <div className="flex aspect-square items-center justify-center p-6 bg-muted rounded-lg">
                           Slide {index + 1}

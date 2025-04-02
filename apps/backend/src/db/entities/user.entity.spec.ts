@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import { User } from "./user.entity";
+import { User } from "./user.entity.js";
 
 describe("User Entity", () => {
   it("should create a user instance", () => {

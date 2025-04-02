@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { User } from "./entities/user.entity";
-import { Item } from "./entities/item.entity";
-import { ItemDetail } from "./entities/item-detail.entity";
-import { UserItem } from "./entities/user-item.entity";
+import { User } from "./entities/user.entity.js";
+import { Item } from "./entities/item.entity.js";
+import { ItemDetail } from "./entities/item-detail.entity.js";
+import { UserItem } from "./entities/user-item.entity.js";
 // import { GameParticipant } from "./entities/game-participant.entity";
-import { dataSourceOptions } from "src/data-source";
+import { dataSourceOptions } from "../data-source.js";
 
 @Module({
   imports: [

@@ -4,7 +4,13 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // Create the application with verbose logging
+  const app = await NestFactory.create(AppModule, {
+    logger: ["error", "warn", "log", "debug", "verbose"],
+  });
+
+  const logger = new Logger("Bootstrap");
+  logger.log("Starting application...");
 
   // Get ConfigService instance
   const configService = app.get(ConfigService);
@@ -22,6 +28,7 @@ async function bootstrap() {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   });
+  logger.log("CORS enabled");
 
   // Use getOrThrow - it expects the value to be defined
   // due to the validation schema having defaults.
@@ -30,7 +37,8 @@ async function bootstrap() {
 
   await app.listen(port);
 
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/`);
+  logger.log(`🚀 Application is running on: http://localhost:${port}/`);
+  logger.log(`tRPC Panel available at: http://localhost:${port}/panel`);
 }
 
 bootstrap().catch((error) => {

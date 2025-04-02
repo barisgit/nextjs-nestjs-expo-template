@@ -9,7 +9,7 @@ const backendEnvExamplePath = path.resolve(
   __dirname,
   "../apps/backend/.env.example"
 );
-const dockerContainerName = "postgres-footy-mastermind";
+const dockerContainerName = "postgres-turbo-template";
 const dbDefaults = {
   host: "localhost",
   port: 5432,

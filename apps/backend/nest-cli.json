@@ -12,7 +12,8 @@
       "dist",
       "**/*.spec.ts",
       "**/test/**",
-      "src/@generated/**"
+      "src/@generated/**",
+      ".turbo"
     ]
   }
 }

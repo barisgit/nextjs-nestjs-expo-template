@@ -3,7 +3,9 @@
   "compilerOptions": {
     "jsx": "react-native",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@repo/ui/*": ["../ui/src/*"],
+      "@repo/backend/*": ["../backend/src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

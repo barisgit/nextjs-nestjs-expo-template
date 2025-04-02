@@ -8,7 +8,7 @@ const config: Config = {
     // Individual package configurations
     "<rootDir>/apps/web/jest.config.js",
     // Add more package-specific Jest configs as needed
-    // "<rootDir>/apps/mobile/jest.config.js",
+    "<rootDir>/apps/mobile/jest.config.js",
     // "<rootDir>/packages/ui/jest.config.js",
   ],
   // Global settings (used as fallbacks if not specified in project configs)

@@ -20,6 +20,8 @@
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#ffffff"
       }
-    }
+    },
+    "ignoreVersionWarnings": true,
+    "newArchEnabled": true
   }
 }

@@ -45,3 +45,5 @@ yarn-error.log*
 *.mobileprovision
 *.orig.*
 web-build/
+
+TODO.md

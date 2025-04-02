@@ -1,7 +1,7 @@
 "use client";
 
 import { type JSX } from "react";
-import { trpc } from "../../lib/trpc";
+import { trpc } from "@/lib/trpc";
 /**
  * This is an example component showing how to use tRPC in your application.
  * IMPORTANT: Replace 'hello' and 'createSomething' with actual procedure names from your API.

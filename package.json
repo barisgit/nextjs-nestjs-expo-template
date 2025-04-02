@@ -15,6 +15,9 @@
     "test": "turbo test",
     "test:cov": "turbo test:cov",
     "test:ci": "turbo test:ci",
+    "test:e2e": "pnpm --filter @repo/web test:e2e",
+    "test:e2e:ui": "pnpm --filter @repo/web test:e2e:ui",
+    "test:e2e:debug": "pnpm --filter @repo/web test:e2e:debug",
     "type-check": "turbo type-check"
   },
   "devDependencies": {

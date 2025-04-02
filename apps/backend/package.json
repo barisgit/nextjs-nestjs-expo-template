@@ -4,10 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm generate-trpc-types && nest build",
-    "dev": "pnpm generate-trpc-types && concurrently -n \"TRPC,NEST\" -c \"blue,green\" \"pnpm run watch-trpc-types\" \"nest start --watch --watchAssets --poll=1000\"",
-    "watch-trpc-types": "nodemon --config nodemon.json",
-    "dev:debug": "pnpm generate-trpc-types && concurrently -n \"TRPC,NEST\" -c \"blue,green\" \"pnpm run watch-trpc-types\" \"nest start --debug --watch --watchAssets --poll=1000\"",
+    "build": "nest build",
+    "dev": "nest start --watch --watchAssets --poll=1000",
+    "dev:debug": "nest start --debug --watch --watchAssets --poll=1000",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
@@ -19,8 +18,7 @@
     "migration:run": "pnpm typeorm migration:run",
     "migration:revert": "pnpm typeorm migration:revert",
     "fullclean": "rm -rf node_modules && rm -rf dist && rm -rf .turbo",
-    "type-check": "tsc --noEmit",
-    "generate-trpc-types": "tsx scripts/generate-trpc-types.ts"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@clerk/express": "^1.3.59",

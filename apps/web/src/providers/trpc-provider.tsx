@@ -4,16 +4,15 @@ import { type JSX } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { type AppRouter } from "@repo/backend/trpc";
 import superjson from "superjson";
 import { useAuth } from "@clerk/nextjs";
-import { TRPCProvider } from "@/utils/trpc";
+import { TRPCProvider, type AppRouter } from "@/utils/trpc";
 
 function makeQueryClient(): QueryClient {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 5 * 1000, // 5 seconds
+        staleTime: 50 * 1000, // 5 seconds
         gcTime: 10 * 60 * 1000, // 10 minutes
         retry: 1,
         refetchOnWindowFocus: false,

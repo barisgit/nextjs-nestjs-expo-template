@@ -5,7 +5,6 @@ import { AuthService } from "../auth/auth.service.js";
 import { Request, Response } from "express";
 import { AppRouter } from "./routers/index.js";
 import { AuthData, TRPCContext } from "./context/index.js";
-import { type AppRouter as AppRouterType } from "./@generated/generated-router-type.js";
 
 @Injectable()
 export class TRPCService {
@@ -98,7 +97,7 @@ export class TRPCService {
     app.use(
       "/trpc",
       createExpressMiddleware({
-        router: this.router as AppRouterType,
+        router: this.router,
         createContext: ({ req, res }) => this.createContext({ req, res }),
       })
     );

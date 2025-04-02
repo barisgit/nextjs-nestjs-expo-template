@@ -19,7 +19,7 @@ export function HelloExample(): JSX.Element {
     if (helloQuery.isLoading) return <p>Loading...</p>;
     if (helloQuery.error)
       return <p className="text-red-500">Error: {helloQuery.error.message}</p>;
-    return <p>{helloQuery.data?.type === "query" && `Hello, ${name}!`}</p>;
+    return <p>{helloQuery.data && `${helloQuery.data.greeting}!`}</p>;
   };
 
   const renderUserQueryResult = (): JSX.Element => {

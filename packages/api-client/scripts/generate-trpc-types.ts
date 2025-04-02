@@ -29,13 +29,27 @@ interface RouterInfo {
   path: string; // Where in the router structure ('root' or a nested path)
 }
 
-async function generateTrpcTypes() {
+async function generateTrpcTypes(
+  options: {
+    backendDir?: string;
+    outputDir?: string;
+  } = {}
+) {
   console.log("Generating tRPC type definitions...");
 
   try {
     // Define source directories
-    const sourceDir = path.resolve(__dirname, "../src/trpc");
+    const baseDir =
+      options.backendDir || path.resolve(__dirname, "../../../apps/backend");
+    const sourceDir = path.resolve(baseDir, "src/trpc");
     const routersDir = path.resolve(sourceDir, "routers");
+
+    // Ensure output directory exists
+    const outputDir =
+      options.outputDir || path.resolve(__dirname, "../src/trpc/@generated");
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
 
     // Parse the _list.ts file to understand the router structure
     const routersList = await parseRoutersList(
@@ -54,11 +68,7 @@ async function generateTrpcTypes() {
     const routerDefinition = generateRouterDefinition(procedures);
 
     // Write to file
-    const outputPath = path.resolve(
-      sourceDir,
-      "@generated",
-      "generated-router-type.ts"
-    );
+    const outputPath = path.resolve(outputDir, "generated-router-type.ts");
     fs.writeFileSync(outputPath, routerDefinition);
 
     console.log(`Router type definition generated at ${outputPath}`);
@@ -358,37 +368,37 @@ const ${routerName}Router = t.router({\n`;
         if (proc.type === "mutation") {
           procedureDef = `  ${procedureName}: publicProcedure
     .input(${mockSchema})
-    .mutation(({ input }) => {
-      return { type: "mutation", input };
+    .mutation(() => {
+      return {} as any;
     }),\n`;
         } else if (proc.type === "subscription") {
           procedureDef = `  ${procedureName}: publicProcedure
     .input(${mockSchema})
-    .subscription(({ input }) => {
-      return { type: "subscription", input };
+    .subscription(() => {
+      return {} as any;
     }),\n`;
         } else {
           // Default to query
           procedureDef = `  ${procedureName}: publicProcedure
     .input(${mockSchema})
-    .query(({ input }) => {
-      return { type: "query", input };
+    .query(() => {
+      return {} as any;
     }),\n`;
         }
       } else {
         // No input schema found, use default implementation
         if (proc.type === "mutation") {
           procedureDef = `  ${procedureName}: publicProcedure.mutation(() => {
-    return { type: "mutation" };
+    return {} as any;
   }),\n`;
         } else if (proc.type === "subscription") {
           procedureDef = `  ${procedureName}: publicProcedure.subscription(() => {
-    return { type: "subscription" };
+    return {} as any;
   }),\n`;
         } else {
           // Default to query
           procedureDef = `  ${procedureName}: publicProcedure.query(() => {
-    return { type: "query" };
+    return {} as any;
   }),\n`;
         }
       }
@@ -423,37 +433,37 @@ export const appRouter = t.router({\n`;
       if (proc.type === "mutation") {
         procedureDef = `  ${proc.name}: publicProcedure
     .input(${mockSchema})
-    .mutation(({ input }) => {
-      return { type: "mutation", input };
+    .mutation(() => {
+      return {} as any;
     }),\n`;
       } else if (proc.type === "subscription") {
         procedureDef = `  ${proc.name}: publicProcedure
     .input(${mockSchema})
-    .subscription(({ input }) => {
-      return { type: "subscription", input };
+    .subscription(() => {
+      return {} as any;
     }),\n`;
       } else {
         // Default to query
         procedureDef = `  ${proc.name}: publicProcedure
     .input(${mockSchema})
-    .query(({ input }) => {
-      return { type: "query", input };
+    .query(() => {
+      return {} as any;
     }),\n`;
       }
     } else {
       // No input schema found, use default implementation
       if (proc.type === "mutation") {
         procedureDef = `  ${proc.name}: publicProcedure.mutation(() => {
-    return { type: "mutation" };
+    return {} as any;
   }),\n`;
       } else if (proc.type === "subscription") {
         procedureDef = `  ${proc.name}: publicProcedure.subscription(() => {
-    return { type: "subscription" };
+    return {} as any;
   }),\n`;
       } else {
         // Default to query
         procedureDef = `  ${proc.name}: publicProcedure.query(() => {
-    return { type: "query" };
+    return {} as any;
   }),\n`;
       }
     }
@@ -485,9 +495,17 @@ export type RouterOutputs = inferRouterOutputs<AppRouter>;
   return routerDefinition;
 }
 
-// Run the generator
-generateTrpcTypes().then((success) => {
-  if (!success) {
-    process.exit(1);
-  }
-});
+// Export the function (but still allow it to be run directly)
+export { generateTrpcTypes };
+
+// Run the generator if this file is executed directly
+// Use different approach to detect if file is run directly vs imported
+const isMainModule =
+  process.argv[1] && process.argv[1].includes("generate-trpc-types");
+if (isMainModule) {
+  generateTrpcTypes().then((success) => {
+    if (!success) {
+      process.exit(1);
+    }
+  });
+}

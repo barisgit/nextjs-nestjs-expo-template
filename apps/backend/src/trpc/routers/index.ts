@@ -1,95 +1,35 @@
 import { Injectable } from "@nestjs/common";
-import { ModuleRef } from "@nestjs/core";
 import { t } from "./base/index.js";
-import { routerStructure } from "./_list.js";
-import { RouterDefinitionNode, RouterClass } from "./utils.js";
-import type { AppRouter as GeneratedAppRouter } from "../@generated/generated-router-type.js";
-import type { AnyRouter } from "@trpc/server";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { BasicRouter } from "./routers/basic.router.js";
+import { AuthRouter } from "./routers/auth.router.js";
 
 /**
- * Dynamically builds the tRPC router based on the structure
- * defined in `_list.ts`.
+ * Static tRPC router that combines all sub-routers
  */
 @Injectable()
 export class AppRouter {
-  constructor(private readonly moduleRef: ModuleRef) {}
+  constructor(
+    private readonly basicRouter: BasicRouter,
+    private readonly authRouter: AuthRouter
+  ) {}
 
-  // Recursive function to build the router structure
-  private buildRouters(
-    definition: RouterDefinitionNode | RouterClass
-  ): AnyRouter {
-    // Base case: If it's a RouterClass
-    if (typeof definition === "function" && definition.prototype) {
-      const routerInstance = this.moduleRef.get<{
-        [key: string]: unknown;
-        router: unknown;
-      }>(definition, { strict: false });
-
-      // Runtime check for valid tRPC router structure (_def)
-      if (
-        !routerInstance ||
-        typeof routerInstance.router !== "object" ||
-        routerInstance.router === null ||
-        typeof (routerInstance.router as { _def?: unknown })._def ===
-          "undefined"
-      ) {
-        throw new Error(
-          `Router class ${definition.name} does not have a valid router property conforming to tRPC router structure (missing _def).`
-        );
-      }
-      // Return the specific router
-      return routerInstance.router as AnyRouter;
-    }
-
-    // Recursive case: If it's a RouterDefinitionNode
-    if (
-      typeof definition === "object" &&
-      definition !== null &&
-      !Array.isArray(definition)
-    ) {
-      // Explicitly type intermediate collections
-      const routersToMerge: AnyRouter[] = [];
-
-      // Process directly merged routers
-      if (definition.direct) {
-        definition.direct.forEach((routerClass) => {
-          routersToMerge.push(this.buildRouters(routerClass));
-        });
-      }
-
-      // Process nested routers
-      const nestedRouters: Record<string, AnyRouter> = {};
-      if (definition.children) {
-        for (const path in definition.children) {
-          nestedRouters[path] = this.buildRouters(definition.children[path]);
-        }
-      }
-
-      if (Object.keys(nestedRouters).length > 0) {
-        routersToMerge.push(t.router(nestedRouters));
-      }
-
-      // Merge routers
-      if (routersToMerge.length === 0) {
-        return t.router({});
-      }
-      if (routersToMerge.length === 1) {
-        return routersToMerge[0];
-      }
-      return t.mergeRouters(...routersToMerge);
-    }
-
-    throw new Error("Invalid router definition node encountered.");
+  public createRouter() {
+    // Combine the routers
+    return t.router({
+      // Merge the basic router at the root level
+      ...this.basicRouter.router._def.record,
+      // Nest the auth router under 'auth'
+      auth: this.authRouter.router,
+    });
   }
 
-  public createRouter(): AnyRouter {
-    return this.buildRouters(routerStructure);
-  }
-
-  public get router(): AnyRouter {
+  public get router() {
     return this.createRouter();
   }
 }
 
-// Re-export the generated router type for client usage
-export type AppRouterType = GeneratedAppRouter;
+// Export type information for client usage
+export type AppRouterType = ReturnType<AppRouter["createRouter"]>;
+export type RouterInputs = inferRouterInputs<AppRouterType>;
+export type RouterOutputs = inferRouterOutputs<AppRouterType>;

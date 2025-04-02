@@ -46,4 +46,18 @@ module.exports = {
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/no-empty-function": "off",
   },
+  overrides: [
+    {
+      // Allow dev dependencies and configure Jest for test files
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:jest/recommended"],
+      env: { "jest/globals": true },
+      rules: {
+        "import/no-extraneous-dependencies": [
+          "error",
+          { devDependencies: true },
+        ],
+      },
+    },
+  ],
 };

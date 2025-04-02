@@ -12,15 +12,26 @@
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "fullclean": "turbo fullclean && rm -rf node_modules && rm pnpm-lock.yaml",
+    "test": "turbo test",
+    "test:cov": "turbo test:cov",
+    "test:ci": "turbo test:ci",
     "type-check": "turbo type-check"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@turbo/gen": "^2.4.4",
+    "@types/jest": "^29.5.14",
+    "@types/prompts": "^2.4.9",
+    "eslint-plugin-jest": "^28.11.0",
+    "jest": "^29.7.0",
     "prettier": "^3.5.3",
-    "turbo": "^2.4.4",
-    "tsx": "^4.19.3",
     "prompts": "^2.4.2",
-    "@types/prompts": "^2.4.9"
+    "ts-jest": "^29.3.0",
+    "tsx": "^4.19.3",
+    "turbo": "^2.4.4"
   },
   "packageManager": "pnpm@10.7.0",
   "pnpm": {

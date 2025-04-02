@@ -9,10 +9,16 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@repo/backend/*": ["../backend/src/*"],
-      "@repo/ui/*": ["../ui/src/*"]
+      "@repo/backend/*": ["../../apps/backend/src/*"],
+      "@repo/ui/*": ["../../packages/ui/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../jest.setup.ts"
+  ],
   "exclude": ["node_modules"]
 }

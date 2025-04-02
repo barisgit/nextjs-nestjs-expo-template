@@ -8,7 +8,7 @@ import { AuthRouter } from "./routers/auth.router.js";
  * Static tRPC router that combines all sub-routers
  */
 @Injectable()
-export class AppRouter {
+export class AppRouterClass {
   constructor(
     private readonly basicRouter: BasicRouter,
     private readonly authRouter: AuthRouter
@@ -30,6 +30,6 @@ export class AppRouter {
 }
 
 // Export type information for client usage
-export type AppRouterType = ReturnType<AppRouter["createRouter"]>;
-export type RouterInputs = inferRouterInputs<AppRouterType>;
-export type RouterOutputs = inferRouterOutputs<AppRouterType>;
+export type AppRouter = ReturnType<AppRouterClass["createRouter"]>;
+export type RouterInputs = inferRouterInputs<AppRouter>;
+export type RouterOutputs = inferRouterOutputs<AppRouter>;

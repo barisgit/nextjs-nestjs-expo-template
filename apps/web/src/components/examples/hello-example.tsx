@@ -31,7 +31,7 @@ export function HelloExample(): JSX.Element {
         </p>
       );
 
-    if (userQuery.data?.type === "query") {
+    if (userQuery.data?.user) {
       return (
         <div className="flex items-center gap-3">
           <div>

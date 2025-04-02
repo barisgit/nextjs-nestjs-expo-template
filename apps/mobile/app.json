@@ -22,6 +22,9 @@
       }
     },
     "ignoreVersionWarnings": true,
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "experiments": {
+      "reactCanary": true
+    }
   }
 }

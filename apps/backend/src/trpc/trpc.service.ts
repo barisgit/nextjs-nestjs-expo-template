@@ -3,7 +3,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { AuthService } from "../auth/auth.service.js";
 import { Request, Response } from "express";
-import { AppRouter } from "./routers/index.js";
+import { AppRouterClass } from "./routers/index.js";
 import { AuthData, TRPCContext } from "./context/index.js";
 
 @Injectable()
@@ -12,7 +12,7 @@ export class TRPCService {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly appRouterService: AppRouter
+    private readonly appRouterService: AppRouterClass
   ) {}
 
   // Create context for each request

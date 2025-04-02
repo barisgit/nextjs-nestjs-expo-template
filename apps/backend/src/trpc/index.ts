@@ -7,3 +7,5 @@ export * from "./trpc-panel.controller.js";
 export * from "./context/index.js";
 export * from "./routers/index.js";
 export * from "./routers/base/index.js";
+
+export type { AppRouter } from "./routers/index.js";

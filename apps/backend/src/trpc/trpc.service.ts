@@ -1,40 +1,39 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { ContextOptions, TRPCContext } from "nestjs-trpc";
-import { AuthService } from "./auth.service";
+import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { AuthService } from "../auth/auth.service";
 import { Request, Response } from "express";
-
-// Define auth data structure separately
-export interface AuthData {
-  userId: string | null;
-  isAuthenticated: boolean;
-  user?: {
-    id: string;
-    firstName: string | null;
-    lastName: string | null;
-    email: string | null;
-    imageUrl: string | null;
-  } | null;
-}
+import { AppRouter } from "./routers";
+import { AuthData, TRPCContext } from "./context";
+import { AnyRouter } from "@trpc/server";
+import { AnyTRPCRouter } from "./types";
 
 @Injectable()
-export class TrpcAuthContext implements TRPCContext {
-  private readonly logger = new Logger(TrpcAuthContext.name);
+export class TRPCService {
+  private readonly logger = new Logger(TRPCService.name);
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly appRouterService: AppRouter
+  ) {}
 
-  async create(opts: ContextOptions): Promise<Record<string, unknown>> {
-    const req = opts.req as Request;
-    const res = opts.res as Response;
-
+  // Create context for each request
+  private async createContext({
+    req,
+    res,
+  }: {
+    req: Request;
+    res: Response;
+  }): Promise<TRPCContext> {
     // Default context with request and response
-    const context: Record<string, unknown> = {
+    const context: TRPCContext = {
       req,
       res,
       auth: {
         userId: null,
         isAuthenticated: false,
         user: null,
-      } as AuthData,
+      },
     };
 
     // Extract token from authorization header
@@ -86,10 +85,30 @@ export class TrpcAuthContext implements TRPCContext {
       );
     }
 
-    return {
-      ...context,
-      req,
-      res,
-    };
+    return context;
+  }
+
+  // Get the router instance
+  public get router(): AnyTRPCRouter {
+    return this.appRouterService.router;
+  }
+
+  // Type helper for client usage
+  public getRouterType(): AnyTRPCRouter {
+    return this.appRouterService.getRouterType();
+  }
+
+  // Apply middleware to NestJS app
+  applyMiddleware(app: NestExpressApplication) {
+    this.logger.log("Applying tRPC middleware to NestJS application");
+    // Use type assertion to fix compatibility issue with tRPC v11
+    app.use(
+      "/trpc",
+      createExpressMiddleware({
+        router: this.router as unknown as AnyRouter,
+        createContext: ({ req, res }) => this.createContext({ req, res }),
+      })
+    );
+    this.logger.log("tRPC middleware applied successfully");
   }
 }

@@ -3,29 +3,25 @@ import { ConfigModule } from "@nestjs/config";
 import { DatabaseModule } from "./db/database.module";
 // import { QuestionsModule } from "./questions/questions.module"; // KEEP commented out
 import { AppConfigModule } from "./config/app-config.module";
-import { TRPCModule } from "nestjs-trpc";
-import { HelloRouter } from "./app.router";
 import { AuthModule } from "./auth/auth.module";
-import { AuthRouter } from "./auth/auth.router";
-import { TrpcAuthContext } from "./auth/trpc-auth.context";
-import { AuthMiddleware } from "./auth/trpc-auth.middleware";
-import { TrpcPanelController } from "./trpc-panel.controller";
+// Import our new tRPC module instead of nestjs-trpc
+import { TRPCModule } from "./trpc/trpc.module";
+import { TRPCPanelController } from "./trpc/trpc-panel.controller";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TRPCModule.forRoot({
-      basePath: "/trpc",
-      autoSchemaFile: "src/@generated/trpc-schema",
-      context: TrpcAuthContext,
-    }),
+    // Replace nestjs-trpc with our own TRPCModule
+    TRPCModule,
     DatabaseModule,
     AppConfigModule,
     AuthModule,
   ],
-  controllers: [TrpcPanelController],
-  providers: [HelloRouter, AuthRouter, TrpcAuthContext, AuthMiddleware],
+  controllers: [TRPCPanelController],
+  // We don't need these providers anymore as they were for nestjs-trpc
+  // The functionality is now inside TRPCService
+  providers: [],
 })
 export class AppModule {}

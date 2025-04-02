@@ -1,17 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "./app.module";
-import {
-  describe,
-  it,
-  expect,
-  beforeEach,
-  afterEach,
-  jest,
-} from "@jest/globals";
+import { describe, it, expect, beforeEach, afterEach } from "@jest/globals";
 import { INestApplication } from "@nestjs/common";
-
-// Mock nestjs-trpc
-jest.mock("nestjs-trpc");
 
 describe("AppModule", () => {
   let app: INestApplication;

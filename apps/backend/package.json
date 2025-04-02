@@ -33,7 +33,6 @@
     "class-validator": "^0.14.1",
     "joi": "^17.13.3",
     "jose": "^6.0.10",
-    "nestjs-trpc": "^1.6.1",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",

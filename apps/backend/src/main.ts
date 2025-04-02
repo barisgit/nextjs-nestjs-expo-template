@@ -2,10 +2,12 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { TRPCService } from "./trpc/trpc.service";
 
 async function bootstrap() {
   // Create the application with verbose logging
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: ["error", "warn", "log", "debug", "verbose"],
   });
 
@@ -29,6 +31,11 @@ async function bootstrap() {
     credentials: true,
   });
   logger.log("CORS enabled");
+
+  // Apply tRPC middleware
+  const trpcService = app.get(TRPCService);
+  trpcService.applyMiddleware(app);
+  logger.log("tRPC middleware applied");
 
   // Use getOrThrow - it expects the value to be defined
   // due to the validation schema having defaults.

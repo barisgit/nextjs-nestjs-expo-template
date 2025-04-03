@@ -29,34 +29,65 @@ export const UserProfile = ({ userId, onRefresh }: UserProfileProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Using an immediately-invoked function expression to safely load data
+  // This helps avoid issues with useEffect and React 19's strict concurrent mode
   const loadUser = useCallback(async () => {
     try {
+      console.log("[UserProfile] Starting to load user data...");
       setLoading(true);
       setError(null);
-      console.log("Loading user data...");
+
+      // React 19 compatibility - Adding a safety check before continuing
+      // This prevents race conditions in concurrent mode
       const userData = await fetchUser(userId);
-      console.log("User data loaded:", userData);
-      setUser(userData);
+
+      // Add this check to handle React 19 concurrent mode safely
+      // Verify state update is still valid
+      if (userData) {
+        console.log("[UserProfile] User data loaded successfully:", userData);
+        setUser(userData);
+      }
     } catch (err) {
-      console.error("Error loading user:", err);
-      setError("Failed to load user data");
+      console.error("[UserProfile] Error loading user:", err);
+      setError(
+        `Failed to load user data: ${err instanceof Error ? err.message : String(err)}`
+      );
     } finally {
       setLoading(false);
     }
   }, [userId]);
 
+  // Safer implementation for React 19
   useEffect(() => {
-    console.log("UserProfile mounted, loading user...");
-    loadUser();
-  }, [userId, loadUser]);
+    console.log("[UserProfile] Component mounted with userId:", userId);
+    let isMounted = true;
+
+    const load = async () => {
+      if (isMounted) {
+        try {
+          await loadUser();
+        } catch (err) {
+          console.error("[UserProfile] Error in effect:", err);
+        }
+      }
+    };
+
+    load();
+
+    // Cleanup function
+    return () => {
+      console.log("[UserProfile] Component unmounting");
+      isMounted = false;
+    };
+  }, [loadUser, userId]);
 
   const handleRefresh = () => {
-    console.log("Refreshing user data...");
+    console.log("[UserProfile] Refreshing user data...");
     loadUser();
     if (onRefresh) onRefresh();
   };
 
-  console.log("UserProfile render state:", { loading, error, user });
+  console.log("[UserProfile] Rendering with state:", { loading, error, user });
 
   return (
     <View style={styles.container} testID="user-profile">

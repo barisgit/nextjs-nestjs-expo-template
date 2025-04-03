@@ -13,18 +13,31 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.appslug"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yourcompany.appslug"
     },
     "ignoreVersionWarnings": true,
     "newArchEnabled": true,
     "experiments": {
-      "reactCanary": true
+      "reactCanary": false,
+      "tsconfigPaths": true
+    },
+    "scheme": "appslug",
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router"],
+    "extra": {
+      "eas": {
+        "projectId": "your-project-id"
+      }
     }
   }
 }

@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.12",
-    "@repo/api-client": "workspace:*",
     "@repo/backend": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "5.71.3",

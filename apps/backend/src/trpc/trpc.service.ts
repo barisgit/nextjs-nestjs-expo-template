@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { AuthService } from "../auth/auth.service.js";
+import { AuthService } from "@repo/services";
 import { Request, Response } from "express";
 import { AppRouterClass } from "./routers/index.js";
 import { AuthData, TRPCContext } from "./context/index.js";

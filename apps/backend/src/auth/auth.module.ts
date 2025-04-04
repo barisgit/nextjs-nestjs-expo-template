@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { AuthService } from "./auth.service.js";
+import { AuthService } from "@repo/services";
 import { ClerkAuthGuard } from "./clerk-auth.guard.js";
 import { ClerkWebhooksController } from "./clerk-webhooks.controller.js";
 

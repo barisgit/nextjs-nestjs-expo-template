@@ -19,7 +19,9 @@
     "ignoreDeprecations": "5.0",
     "paths": {
       "@/*": ["./src/*"],
-      "@repo/db/*": ["../../packages/db/src/*"]
+      "@repo/db/*": ["../../packages/db/src/*"],
+      "@repo/services/*": ["../../packages/services/src/*"],
+      "@repo/trpc/*": ["../../packages/trpc/src/*"]
     }
   },
   "include": ["src/**/*"],

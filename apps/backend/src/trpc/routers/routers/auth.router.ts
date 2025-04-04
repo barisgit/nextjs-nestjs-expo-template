@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { AuthService } from "../../../auth/auth.service.js";
+import { AuthService } from "@repo/services";
 import { procedure, protectedProcedure, t } from "../base/index.js";
 
 @Injectable()

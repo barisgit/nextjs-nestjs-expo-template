@@ -1,0 +1,36 @@
+{
+  "name": "@repo/services",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@clerk/express": "^1.4.0",
+    "@nestjs/common": "^11.0.13",
+    "@nestjs/config": "^4.0.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.14.0",
+    "eslint": "^8.57.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2"
+  }
+}

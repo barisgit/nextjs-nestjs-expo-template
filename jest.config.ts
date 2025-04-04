@@ -7,6 +7,7 @@ const config: Config = {
   projects: [
     // Individual package configurations
     "<rootDir>/apps/web/jest.config.js",
+    "<rootDir>/apps/backend/jest.config.cjs",
     // Add more package-specific Jest configs as needed
     "<rootDir>/apps/mobile/jest.config.js",
     // "<rootDir>/packages/ui/jest.config.js",

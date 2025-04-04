@@ -16,10 +16,10 @@
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
     "fullclean": "rm -rf dist && rm -rf node_modules && rm -rf .turbo",
-    "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts",
-    "migration:generate": "pnpm typeorm migration:generate",
-    "migration:run": "pnpm typeorm migration:run",
-    "migration:revert": "pnpm typeorm migration:revert"
+    "typeorm": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts",
+    "migration:generate": "tsx ./scripts/generate-migration.ts",
+    "migration:run": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts migration:run",
+    "migration:revert": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.13",
@@ -36,7 +36,10 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.14.0",
     "eslint": "^8.57.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   },
   "exports": {

@@ -6,12 +6,18 @@ module.exports = {
   roots: ["<rootDir>/src"],
   moduleFileExtensions: ["js", "json", "ts"],
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest",
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.json",
+      },
+    ],
   },
-  collectCoverageFrom: ["**/*.(t|j)s"],
+  collectCoverageFrom: ["src/**/*.(t|j)s"],
   coverageDirectory: "../coverage",
   testRegex: ".*\\.spec\\.ts$",
   moduleNameMapper: {
+    "^@repo/db/(.*)$": "<rootDir>/../../packages/db/dist/$1",
     "^src/(.*)$": "<rootDir>/src/$1",
   },
 };

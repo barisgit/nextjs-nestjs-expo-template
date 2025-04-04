@@ -13,10 +13,6 @@
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "typeorm": "pnpm --filter @repo/db typeorm",
-    "migration:generate": "pnpm --filter @repo/db migration:generate",
-    "migration:run": "pnpm --filter @repo/db migration:run",
-    "migration:revert": "pnpm --filter @repo/db migration:revert",
     "fullclean": "rm -rf node_modules && rm -rf dist && rm -rf .turbo",
     "type-check": "tsc --noEmit"
   },

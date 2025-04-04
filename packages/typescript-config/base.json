@@ -8,7 +8,8 @@
       "@repo/backend/*": ["../backend/src/*"],
       "@repo/web/*": ["../web/src/*"],
       "@repo/mobile/*": ["../mobile/src/*"],
-      "@repo/api-client/*": ["../api-client/src/*"]
+      "@repo/api-client/*": ["../api-client/src/*"],
+      "@repo/db/*": ["../db/src/*"]
     },
     "declaration": true,
     "declarationMap": true,

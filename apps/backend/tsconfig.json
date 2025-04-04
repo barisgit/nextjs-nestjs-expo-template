@@ -16,7 +16,11 @@
     "skipLibCheck": true,
     "types": ["node"],
     "noImplicitAny": false,
-    "ignoreDeprecations": "5.0"
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@repo/db/*": ["../../packages/db/src/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "src/@generated"]

@@ -66,6 +66,6 @@
     "jest": "^29.7.0",
     "jest-expo": "53.0.0-canary-20250403-13261ac",
     "react-test-renderer": "18.2.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }

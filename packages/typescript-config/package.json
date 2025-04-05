@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "fullclean": "rm -rf node_modules"
+  },
   "files": [
     "base.json",
     "nextjs.json",
@@ -10,10 +13,10 @@
   ],
   "devDependencies": {
     "@tsconfig/node-lts": "latest",
-    "typescript": "^5.4.3"
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "typescript": "^5.4.3"
+    "typescript": "^5.8.3"
   },
   "publishConfig": {
     "access": "public"

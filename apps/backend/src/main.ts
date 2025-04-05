@@ -4,7 +4,7 @@ import { AppModule } from "./app.module.js";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { TRPCService } from "./trpc/trpc.service.js";
+import { TRPCService } from "@repo/trpc";
 
 async function bootstrap() {
   // Create the application with verbose logging

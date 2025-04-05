@@ -14,7 +14,7 @@ export class TRPCPanelController {
 
     try {
       // Type assertion for compatibility with trpc-ui
-      // eslint-disable-next-line
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return renderTrpcPanel(this.trpcService.router as any, {
         url: "http://localhost:3001/trpc", // This should match your tRPC endpoint
         meta: {

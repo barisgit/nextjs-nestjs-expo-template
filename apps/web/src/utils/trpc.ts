@@ -1,4 +1,4 @@
-import type { AppRouter } from "@repo/backend/trpc";
+import type { AppRouter } from "@repo/trpc";
 import { createTRPCContext } from "@trpc/tanstack-react-query";
 
 // We're using the auto-generated type definition

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/services",
+  "name": "@repo/trpc",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -24,11 +24,19 @@
   "dependencies": {
     "@clerk/express": "^1.4.0",
     "@nestjs/common": "^11.0.13",
-    "@nestjs/config": "^4.0.2"
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/platform-express": "^11.0.13",
+    "@repo/services": "workspace:*",
+    "@trpc/server": "^11.0.2",
+    "express": "^5.1.0",
+    "superjson": "^2.2.2",
+    "trpc-ui": "^1.0.15",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "eslint": "^8.57.0",
     "tsup": "^8.4.0",

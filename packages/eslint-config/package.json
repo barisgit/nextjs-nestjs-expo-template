@@ -2,6 +2,9 @@
   "name": "@repo/eslint-config",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "fullclean": "rm -rf node_modules"
+  },
   "files": [
     "node.js",
     "next.js",

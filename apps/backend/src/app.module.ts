@@ -3,16 +3,15 @@ import { ConfigModule } from "@nestjs/config";
 import { DatabaseModule } from "@repo/db";
 import { AppConfigModule } from "./config/app-config.module.js";
 import { AuthModule } from "./auth/auth.module.js";
-// Import our new tRPC module instead of nestjs-trpc
-import { TRPCModule } from "./trpc/trpc.module.js";
-import { TRPCPanelController } from "./trpc/trpc-panel.controller.js";
+// Import the TRPCModule and TRPCPanelController from our package
+import { TRPCModule, TRPCPanelController } from "@repo/trpc";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    // Replace nestjs-trpc with our own TRPCModule
+    // Use our exported TRPCModule
     TRPCModule,
     DatabaseModule,
     AppConfigModule,

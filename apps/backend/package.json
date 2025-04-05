@@ -19,6 +19,7 @@
   "dependencies": {
     "@repo/db": "workspace:*",
     "@repo/services": "workspace:*",
+    "@repo/trpc": "workspace:*",
     "@clerk/express": "^1.4.0",
     "@nestjs/common": "^11.0.13",
     "@nestjs/config": "^4.0.2",
@@ -68,6 +69,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }

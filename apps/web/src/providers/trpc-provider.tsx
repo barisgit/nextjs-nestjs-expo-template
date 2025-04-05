@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import superjson from "superjson";
 import { useAuth } from "@clerk/nextjs";
 import { TRPCProvider, type AppRouter } from "@/utils/trpc";
+import { env } from "@/env";
 
 function makeQueryClient(): QueryClient {
   return new QueryClient({
@@ -43,7 +44,7 @@ export function AppTRPCProvider({ children }: TRPCProviderProps): JSX.Element {
   const trpcClient = createTRPCClient({
     links: [
       httpBatchLink({
-        url: process.env.NEXT_PUBLIC_TRPC_URL ?? "http://localhost:4000/trpc",
+        url: env.NEXT_PUBLIC_TRPC_URL,
         transformer: superjson,
         async headers() {
           const token = await getToken();
@@ -62,7 +63,7 @@ export function AppTRPCProvider({ children }: TRPCProviderProps): JSX.Element {
         queryClient={queryClient}
       >
         {children}
-        {process.env.NODE_ENV !== "production" && <ReactQueryDevtools />}
+        {env.NODE_ENV !== "production" && <ReactQueryDevtools />}
       </TRPCProvider>
     </QueryClientProvider>
   );

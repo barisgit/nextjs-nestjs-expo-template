@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@repo/ui", "@repo/backend"],
+  transpilePackages: [
+    "@repo/ui",
+    "@repo/backend",
+    "@t3-oss/env-nextjs",
+    "@t3-oss/env-core",
+  ],
   images: {
     remotePatterns: [
       {

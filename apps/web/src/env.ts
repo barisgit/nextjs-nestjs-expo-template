@@ -16,27 +16,10 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_IS_PRODUCTION: z.boolean().default(false),
-    NEXT_PUBLIC_API_URL: z
-      .string()
-      .url()
-      .refine(
-        (val) =>
-          process.env.NODE_ENV !== "production" || !val.includes("localhost"),
-        {
-          message: "Cannot use localhost in production environment",
-        }
-      )
-      .default("http://localhost:3001"),
+    NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3001"),
     NEXT_PUBLIC_TRPC_URL: z
       .string()
       .url()
-      .refine(
-        (val) =>
-          process.env.NODE_ENV !== "production" || !val.includes("localhost"),
-        {
-          message: "Cannot use localhost in production environment",
-        }
-      )
       .default("http://localhost:3001/trpc"),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1),

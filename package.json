@@ -4,9 +4,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:web": "turbo dev --filter=@repo/web --filter=@repo/ui",
-    "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui",
-    "dev:backend": "turbo dev --filter=@repo/backend",
+    "dev:web": "turbo dev --filter=@repo/web --filter=@repo/ui --filter=@repo/trpc --filter=@repo/services --filter=@repo/db",
+    "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui --filter=@repo/trpc --filter=@repo/services --filter=@repo/db",
+    "dev:backend": "turbo dev --filter=@repo/backend --filter=@repo/trpc --filter=@repo/services --filter=@repo/db",
     "db:setup": "tsx scripts/setup-backend-env.ts",
     "lint": "turbo lint",
     "clean": "turbo clean",

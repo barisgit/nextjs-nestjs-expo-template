@@ -10,12 +10,15 @@
     "NODE_ENV",
     "PORT"
   ],
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^build"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,

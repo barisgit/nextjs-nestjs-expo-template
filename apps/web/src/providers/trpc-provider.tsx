@@ -63,7 +63,7 @@ export function AppTRPCProvider({ children }: TRPCProviderProps): JSX.Element {
         queryClient={queryClient}
       >
         {children}
-        {env.NODE_ENV !== "production" && <ReactQueryDevtools />}
+        {!env.NEXT_PUBLIC_IS_PRODUCTION && <ReactQueryDevtools />}
       </TRPCProvider>
     </QueryClientProvider>
   );

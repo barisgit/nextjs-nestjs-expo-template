@@ -26,6 +26,9 @@
     "@repo/ui": "workspace:*",
     "@repo/websocket-types": "workspace:*",
     "@t3-oss/env-core": "^0.12.0",
+    "@tamagui/babel-plugin": "^1.125.33",
+    "@tamagui/config": "^1.125.33",
+    "@tamagui/font-inter": "^1.125.33",
     "@tanstack/react-query": "^5.71.10",
     "@trpc/client": "^11.0.2",
     "@trpc/react-query": "^11.0.2",
@@ -36,6 +39,7 @@
     "expo-dev-client": "5.1.0",
     "expo-dev-launcher": "5.0.35",
     "expo-dev-menu": "6.0.25",
+    "expo-font": "^13.0.4",
     "expo-secure-store": "^14.0.1",
     "expo-status-bar": "2.1.0",
     "expo-web-browser": "^14.0.2",
@@ -45,6 +49,7 @@
     "react-native-safe-area-context": "5.3.0",
     "socket.io-client": "^4.8.1",
     "superjson": "^2.2.2",
+    "tamagui": "^1.125.33",
     "zod": "^3.24.2"
   },
   "devDependencies": {

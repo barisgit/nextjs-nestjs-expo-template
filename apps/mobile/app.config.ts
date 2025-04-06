@@ -53,7 +53,7 @@ const baseConfig: Omit<ExpoConfig, "extra"> = {
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/logo.png",
-  userInterfaceStyle: "light",
+  userInterfaceStyle: "automatic",
   splash: {
     image: "./assets/logo.png",
     resizeMode: "contain",

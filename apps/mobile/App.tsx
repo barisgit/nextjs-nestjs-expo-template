@@ -1,11 +1,23 @@
+import "./tamagui-web.css";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, ReactNode, ErrorInfo } from "react";
-import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Platform,
+  useColorScheme,
+} from "react-native";
 import { SafeAreaWrapper } from "./components/SafeAreaWrapper";
 import { TRPCProvider } from "./providers/TRPCProvider";
 import { HelloExample } from "./components/HelloExample";
 import { CustomClerkProvider } from "./providers/ClerkProvider";
 import { ClerkAuth } from "./components/ClerkAuth";
+import { TamaguiProvider } from "tamagui";
+import config from "./tamagui.config";
+import { TamaguiDemo } from "./components/TamaguiDemo";
+import { useFonts } from "expo-font";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -48,6 +60,13 @@ class ErrorBoundary extends React.Component<
 }
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
+  const [fontsLoaded] = useFonts({
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
+
   const handleRefresh = () => {
     console.log("Profile refreshed");
   };
@@ -57,31 +76,46 @@ export default function App() {
     console.log("[App] Platform:", Platform.OS, Platform.Version);
   }, []);
 
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading fonts...</Text>
+      </View>
+    );
+  }
+
   return (
     <ErrorBoundary>
-      <CustomClerkProvider>
-        <TRPCProvider>
-          <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
-            <ScrollView contentContainerStyle={styles.scrollView}>
-              <StatusBar style="auto" />
-              <View style={styles.container}>
-                <Text style={styles.title}>Mobile App</Text>
-                <Text style={styles.subtitle}>Welcome to the demo app</Text>
+      <TamaguiProvider config={config} defaultTheme={colorScheme || "light"}>
+        <CustomClerkProvider>
+          <TRPCProvider>
+            <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
+              <ScrollView contentContainerStyle={styles.scrollView}>
+                <StatusBar style="auto" />
+                <View style={styles.container}>
+                  <Text style={styles.title}>Mobile App</Text>
+                  <Text style={styles.subtitle}>Welcome to the demo app</Text>
 
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Authentication:</Text>
-                  <ClerkAuth />
-                </View>
+                  <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Authentication:</Text>
+                    <ClerkAuth />
+                  </View>
 
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>tRPC Demo:</Text>
-                  <HelloExample />
+                  <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>tRPC Demo:</Text>
+                    <HelloExample />
+                  </View>
+
+                  <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
+                    <TamaguiDemo />
+                  </View>
                 </View>
-              </View>
-            </ScrollView>
-          </SafeAreaWrapper>
-        </TRPCProvider>
-      </CustomClerkProvider>
+              </ScrollView>
+            </SafeAreaWrapper>
+          </TRPCProvider>
+        </CustomClerkProvider>
+      </TamaguiProvider>
     </ErrorBoundary>
   );
 }

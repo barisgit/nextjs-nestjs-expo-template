@@ -3,6 +3,7 @@ import type { AppRouter } from "@repo/trpc";
 import superjson from "superjson";
 import { QueryClient } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
+import { env } from "./env";
 
 // Create tRPC client with react-query integration
 export const trpc = createTRPCReact<AppRouter>();
@@ -21,7 +22,7 @@ export const createQueryClient = () =>
   });
 
 // Configuration for API URL
-const API_URL = "http://192.168.1.89:3001/trpc";
+const API_URL = env.EXPO_PUBLIC_TRPC_URL;
 
 // Create tRPC client
 export const createTRPCClient = (token?: string) => {

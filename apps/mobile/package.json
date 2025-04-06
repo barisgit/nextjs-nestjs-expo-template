@@ -63,6 +63,7 @@
     "@types/react": "~18.3.20",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
+    "dotenv": "^16.4.7",
     "eslint": "^8.57.1",
     "eslint-config-expo": "8.0.1",
     "eslint-config-prettier": "^9.1.0",

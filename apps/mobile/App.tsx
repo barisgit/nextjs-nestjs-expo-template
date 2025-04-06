@@ -3,6 +3,8 @@ import React, { useEffect, ReactNode, ErrorInfo } from "react";
 import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
 import { UserProfile } from "./components/UserProfile";
 import { SafeAreaWrapper } from "./components/SafeAreaWrapper";
+import { TRPCProvider } from "./providers/TRPCProvider";
+import { HelloExample } from "./components/HelloExample";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -56,20 +58,27 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          <StatusBar style="auto" />
-          <View style={styles.container}>
-            <Text style={styles.title}>Mobile App</Text>
-            <Text style={styles.subtitle}>Welcome to the demo app</Text>
+      <TRPCProvider>
+        <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <StatusBar style="auto" />
+            <View style={styles.container}>
+              <Text style={styles.title}>Mobile App</Text>
+              <Text style={styles.subtitle}>Welcome to the demo app</Text>
 
-            <View style={styles.profileContainer}>
-              <Text style={styles.sectionTitle}>User Profile:</Text>
-              <UserProfile userId={1} onRefresh={handleRefresh} />
+              <View style={styles.profileContainer}>
+                <Text style={styles.sectionTitle}>User Profile:</Text>
+                <UserProfile userId={1} onRefresh={handleRefresh} />
+              </View>
+
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>tRPC Demo:</Text>
+                <HelloExample />
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </SafeAreaWrapper>
+          </ScrollView>
+        </SafeAreaWrapper>
+      </TRPCProvider>
     </ErrorBoundary>
   );
 }
@@ -127,5 +136,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
     textAlign: "center",
+  },
+  section: {
+    width: "100%",
+    marginBottom: 20,
+    marginTop: 20,
   },
 });

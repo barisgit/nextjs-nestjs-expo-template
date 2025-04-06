@@ -7,7 +7,9 @@
     "paths": {
       "@/*": ["./*"],
       "@repo/ui/*": ["../ui/src/*"],
-      "@repo/backend/*": ["../backend/src/*"]
+      "@repo/backend/*": ["../backend/src/*"],
+      "@repo/websocket-types/*": ["../websocket-types/src/*"],
+      "@repo/trpc/*": ["../trpc/src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

@@ -5,6 +5,7 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { TRPCService } from "@repo/trpc";
+import * as os from "os";
 
 async function bootstrap() {
   // Create the application with minimal logging in production
@@ -51,9 +52,28 @@ async function bootstrap() {
   // due to the validation schema having defaults.
   const port = configService.getOrThrow<number>("PORT");
 
-  await app.listen(port);
+  // Get local IP address
+  let localIp = "localhost";
+  const networkInterfaces = os.networkInterfaces();
 
-  logger.log(`🚀 Application is running on: http://localhost:${port}/`);
+  // Find the first non-internal IPv4 address
+  Object.keys(networkInterfaces).forEach((interfaceName) => {
+    const interfaces = networkInterfaces[interfaceName];
+    if (interfaces) {
+      for (const iface of interfaces) {
+        if (iface.family === "IPv4" && !iface.internal) {
+          localIp = iface.address;
+          return; // Exit the inner loop once found
+        }
+      }
+    }
+  });
+
+  await app.listen(port, "0.0.0.0");
+
+  logger.log(
+    `🚀 Application is running on: http://localhost:${port}/ and http://${localIp}:${port}/`
+  );
   logger.log(`tRPC Panel available at: http://localhost:${port}/panel`);
 }
 

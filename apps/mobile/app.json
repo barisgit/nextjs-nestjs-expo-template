@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.yourcompany.appslug",
@@ -39,6 +37,7 @@
       "bundler": "metro"
     },
     "extra": {
+      "EXPO_PUBLIC_TRPC_URL": "http://localhost:3001/trpc",
       "eas": {
         "projectId": "e990666e-c30f-4c41-8abd-c5a562c79cdc"
       }

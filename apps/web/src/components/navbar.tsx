@@ -15,39 +15,35 @@ export function Navbar(): JSX.Element {
           App Template
         </Link>
 
-        <div className="flex items-center gap-4">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
+        <div className="flex items-center gap-0">
+          <Button variant="link" asChild>
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+          </Button>
 
-          <Link href="/chat" className="hover:underline">
-            Chat
-          </Link>
+          <Button variant="link" asChild>
+            <Link href="/chat" className="hover:underline">
+              Chat
+            </Link>
+          </Button>
 
           {isSignedIn ? (
             <>
-              <Link href="/profile" className="hover:underline">
-                Profile
-              </Link>
+              <Button variant="link" asChild>
+                <Link href="/profile" className="hover:underline">
+                  Profile
+                </Link>
+              </Button>
               <UserButton afterSignOutUrl="/" />
             </>
           ) : (
             <>
               <SignInButton mode="modal">
-                <Button
-                  variant="ghost"
-                  className="hover:underline hover:text-white"
-                >
-                  Sign In
-                </Button>
+                <Button variant="link">Sign In</Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <Button
-                  variant="ghost"
-                  className="hover:underline hover:text-white"
-                >
-                  Sign Up
-                </Button>
+                <Button variant="link">Sign Up</Button>
               </SignUpButton>
             </>
           )}

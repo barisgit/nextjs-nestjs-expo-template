@@ -19,8 +19,6 @@ export function HelloExample() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>tRPC Example</Text>
-
       {/* Input to update name parameter */}
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Your Name:</Text>

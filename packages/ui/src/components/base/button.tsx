@@ -15,7 +15,7 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:opacity-90 active:opacity-80",
         ghost:
           "hover:text-[var(--btn-color)] active:text-[var(--btn-active)] focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none",
-        link: "text-text-accent underline-offset-4 hover:underline",
+        link: "text-[var(--btn-text)] underline-offset-4 hover:underline",
         solid:
           "bg-[var(--btn-color)] text-[var(--btn-text)] border border-[var(--btn-color)] hover:bg-[var(--btn-hover)] hover:border-[var(--btn-hover)] hover:text-[var(--btn-text-hover)] active:bg-[var(--btn-active)] active:border-[var(--btn-active)] active:text-[var(--btn-text-active)]",
         soft: "bg-[color-mix(in_srgb,var(--btn-color)_15%,transparent)] text-[var(--btn-color)] border border-transparent hover:bg-[color-mix(in_srgb,var(--btn-hover)_25%,transparent)] hover:text-[var(--btn-hover)] active:bg-[color-mix(in_srgb,var(--btn-active)_30%,transparent)] active:text-[var(--btn-active)]",

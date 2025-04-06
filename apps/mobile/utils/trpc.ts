@@ -24,13 +24,25 @@ export const createQueryClient = () =>
 // Configuration for API URL
 const API_URL = env.EXPO_PUBLIC_TRPC_URL;
 
+// Type for token provider - either string or function that returns a Promise with string
+type TokenProvider = string | (() => Promise<string | null>);
+
 // Create tRPC client
-export const createTRPCClient = (token?: string) => {
+export const createTRPCClient = (tokenProvider?: TokenProvider) => {
   return trpc.createClient({
     links: [
       httpBatchLink({
         url: API_URL,
         headers: async () => {
+          let token = "";
+
+          if (typeof tokenProvider === "function") {
+            const result = await tokenProvider();
+            token = result || "";
+          } else if (typeof tokenProvider === "string") {
+            token = tokenProvider;
+          }
+
           return {
             authorization: token ? `Bearer ${token}` : "",
           };

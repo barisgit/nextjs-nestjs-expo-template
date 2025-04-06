@@ -49,7 +49,8 @@ export default () => {
   const extraConfig = {
     EXPO_PUBLIC_TRPC_URL: process.env.EXPO_PUBLIC_TRPC_URL,
     // Add other env vars loaded from .env here if needed
-    // EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
     eas: {
       // Load EAS Project ID - you can keep it static or load from env too
       projectId:

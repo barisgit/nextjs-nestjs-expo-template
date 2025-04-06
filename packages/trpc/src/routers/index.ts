@@ -3,6 +3,7 @@ import { t } from "./base/index.js";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { BasicRouter } from "./routers/basic.router.js";
 import { AuthRouter } from "./routers/auth.router.js";
+import { ChatRoomRouter } from "./routers/chatroom.router.js";
 
 /**
  * Static tRPC router that combines all sub-routers
@@ -11,7 +12,8 @@ import { AuthRouter } from "./routers/auth.router.js";
 export class AppRouterClass {
   constructor(
     private readonly basicRouter: BasicRouter,
-    private readonly authRouter: AuthRouter
+    private readonly authRouter: AuthRouter,
+    private readonly chatRoomRouter: ChatRoomRouter
   ) {}
 
   public createRouter() {
@@ -21,6 +23,8 @@ export class AppRouterClass {
       ...this.basicRouter.router._def.record,
       // Nest the auth router under 'auth'
       auth: this.authRouter.router,
+      // Nest the chatRoom router under 'chatroom'
+      chatroom: this.chatRoomRouter.router,
     });
   }
 

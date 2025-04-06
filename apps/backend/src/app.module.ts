@@ -5,6 +5,7 @@ import { AppConfigModule } from "./config/app-config.module.js";
 import { AuthModule } from "./auth/auth.module.js";
 // Import the TRPCModule and TRPCPanelController from our package
 import { TRPCModule, TRPCPanelController } from "@repo/trpc";
+import { WebsocketsModule } from "./websockets/websockets.module.js";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TRPCModule, TRPCPanelController } from "@repo/trpc";
     DatabaseModule,
     AppConfigModule,
     AuthModule,
+    WebsocketsModule,
   ],
   controllers: [TRPCPanelController],
   providers: [],

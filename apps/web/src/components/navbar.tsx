@@ -20,6 +20,10 @@ export function Navbar(): JSX.Element {
             Home
           </Link>
 
+          <Link href="/chat" className="hover:underline">
+            Chat
+          </Link>
+
           {isSignedIn ? (
             <>
               <Link href="/profile" className="hover:underline">

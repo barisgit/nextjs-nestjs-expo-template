@@ -11,7 +11,8 @@
       "@/*": ["./src/*"],
       "@repo/backend/*": ["../../apps/backend/src/*"],
       "@repo/ui/*": ["../../packages/ui/src/*"],
-      "@repo/api-client/*": ["../../packages/api-client/src/*"]
+      "@repo/api-client/*": ["../../packages/api-client/src/*"],
+      "@repo/websocket-types/*": ["../../packages/websocket-types/src/*"]
     }
   },
   "include": [

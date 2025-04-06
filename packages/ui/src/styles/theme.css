@@ -1,5 +1,6 @@
 @theme {
   /* Theme variables */
+  --color-background: var(--color-light-background-default);
   --color-background-default: var(--color-light-background-default);
   --color-background-paper: var(--color-light-background-paper);
   --color-background-level1: var(--color-light-background-level1);

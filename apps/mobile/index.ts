@@ -1,5 +1,5 @@
 import { registerRootComponent } from "expo";
-import App from "./App.js";
+import App from "./App";
 
 // Log the startup for debugging
 console.log("Initializing app with React version:", require("react").version);

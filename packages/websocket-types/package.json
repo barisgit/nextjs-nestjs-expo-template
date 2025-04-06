@@ -27,8 +27,6 @@
     "@repo/typescript-config": "workspace:*",
     "eslint": "^8.57.1",
     "typescript": "^5.8.3",
-    "@types/socket.io": "^3.0.2",
-    "@types/socket.io-client": "^3.0.0",
     "@types/node": "^22.14.0"
   }
 }

@@ -1,6 +1,8 @@
 {
   "extends": "@repo/typescript-config/react-library",
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "module": "preserve",
     "jsx": "react-native",
     "paths": {
       "@/*": ["./*"],

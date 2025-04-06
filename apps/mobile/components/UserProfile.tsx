@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { Button } from "./Button.js";
+import { Button } from "./Button";
 
 interface User {
   id: number;

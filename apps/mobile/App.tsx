@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, ReactNode, ErrorInfo } from "react";
 import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
-import { UserProfile } from "./components/UserProfile.js";
-import { SafeAreaWrapper } from "./components/SafeAreaWrapper.js";
+import { UserProfile } from "./components/UserProfile";
+import { SafeAreaWrapper } from "./components/SafeAreaWrapper";
 
 interface ErrorBoundaryProps {
   children: ReactNode;

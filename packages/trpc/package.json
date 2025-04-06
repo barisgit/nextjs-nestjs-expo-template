@@ -39,7 +39,6 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.1",
-    "@types/ioredis": "^5.0.0",
     "@types/node": "^22.14.0",
     "@types/uuid": "^10.0.0",
     "eslint": "^8.57.0",

@@ -11,6 +11,7 @@ import {
 import { useAuth, useSignIn, useSignUp } from "@clerk/clerk-expo";
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function ClerkAuth() {
   const { isSignedIn, signOut, userId } = useAuth();
@@ -24,6 +25,8 @@ export function ClerkAuth() {
     setActive: setSignUpActive,
     isLoaded: isSignUpLoaded,
   } = useSignUp();
+
+  const queryClient = useQueryClient();
 
   // OAuth hooks
   const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
@@ -59,6 +62,7 @@ export function ClerkAuth() {
       if (createdSessionId) {
         // Set the new session as active
         await setActive!({ session: createdSessionId });
+        queryClient.invalidateQueries();
       }
     } catch (err) {
       console.error(`Error signing in with ${provider}:`, err);
@@ -82,6 +86,7 @@ export function ClerkAuth() {
       // Set the session as active
       if (result.status === "complete" && setSignInActive) {
         await setSignInActive({ session: result.createdSessionId });
+        queryClient.invalidateQueries();
       } else {
         console.log("Sign in is not complete", result);
       }
@@ -126,6 +131,7 @@ export function ClerkAuth() {
       if (result.status === "complete" && setSignUpActive) {
         await setSignUpActive({ session: result.createdSessionId });
         setPendingVerification(false);
+        queryClient.invalidateQueries();
       } else {
         console.log("Verification is not complete", result);
       }
@@ -138,6 +144,7 @@ export function ClerkAuth() {
     try {
       if (signOut) {
         await signOut();
+        queryClient.invalidateQueries();
       } else {
         console.error("signOut is not available");
       }

@@ -12,5 +12,5 @@
       "@repo/trpc/*": ["../trpc/src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "app.config.ts"]
 }

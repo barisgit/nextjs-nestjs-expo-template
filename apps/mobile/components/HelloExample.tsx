@@ -6,16 +6,18 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { trpc } from "../utils/trpc";
+import { useTRPC } from "../utils/trpc";
+import { useQuery } from "@tanstack/react-query";
 
 export function HelloExample() {
   const [name, setName] = useState("World");
   const [incrementCount, setIncrementCount] = useState(0);
+  const trpc = useTRPC();
 
   // Use tRPC queries
-  const helloQuery = trpc.hello.useQuery({ name });
-  const incrementQuery = trpc.increment.useQuery(incrementCount);
-  const userQuery = trpc.me.useQuery();
+  const helloQuery = useQuery(trpc.hello.queryOptions({ name }));
+  const incrementQuery = useQuery(trpc.increment.queryOptions(incrementCount));
+  const userQuery = useQuery(trpc.me.queryOptions());
 
   return (
     <View style={styles.container}>

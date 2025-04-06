@@ -1,7 +1,14 @@
 import React, { useState, ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { trpc, createQueryClient, createTRPCClient } from "../utils/trpc";
+import {
+  TRPCProvider as GeneratedTRPCProvider,
+  createQueryClient,
+  createTRPCClient,
+  useTRPCClient,
+} from "../utils/trpc";
 import { useAuth } from "@clerk/clerk-expo";
+import { type TRPCClient } from "@trpc/client";
+import { type AppRouter } from "@repo/trpc";
 
 interface TRPCProviderProps {
   children: ReactNode;
@@ -11,16 +18,16 @@ export function TRPCProvider({ children }: TRPCProviderProps) {
   const { getToken } = useAuth();
   // Create QueryClient and TRPCClient
   const [queryClient] = useState(() => createQueryClient());
-  const [trpcClient] = useState(() =>
-    createTRPCClient(async () => {
-      const token = await getToken();
-      return token;
-    })
-  );
+  const [trpcClient] = useState(() => createTRPCClient(getToken));
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trpc.Provider>
+    <QueryClientProvider client={queryClient}>
+      <GeneratedTRPCProvider
+        trpcClient={trpcClient as TRPCClient<AppRouter>}
+        queryClient={queryClient}
+      >
+        {children}
+      </GeneratedTRPCProvider>
+    </QueryClientProvider>
   );
 }

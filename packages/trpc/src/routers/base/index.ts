@@ -6,15 +6,17 @@ import superjson from "superjson";
 
 const logger = new Logger("TRPCBaseRouter");
 
-// Initialize tRPC
+// Initialize tRPC with optimized settings
 export const t = initTRPC.context<TRPCContext>().create({
   transformer: superjson,
+  allowOutsideOfServer: true,
 });
 
 // Create middleware to check authentication
 export const isAuthed = t.middleware(({ ctx, next, path }): AnyMiddleware => {
   if (!ctx.auth?.isAuthenticated) {
-    logger.warn(`Unauthorized access attempt to ${path}`);
+    // Only log at debug level to reduce overhead
+    logger.debug(`Unauthorized access attempt to ${path}`);
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message: "You must be logged in to access this resource",

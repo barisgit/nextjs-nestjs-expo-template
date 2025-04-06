@@ -8,6 +8,7 @@
     "dev:mobile": "turbo dev --filter=@repo/mobile --filter=@repo/ui --filter=@repo/trpc --filter=@repo/services --filter=@repo/db",
     "dev:backend": "turbo dev --filter=@repo/backend --filter=@repo/trpc --filter=@repo/services --filter=@repo/db",
     "db:setup": "tsx scripts/setup-backend-env.ts",
+    "redis:setup": "tsx scripts/setup-redis.ts",
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

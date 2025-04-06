@@ -7,18 +7,30 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import { TRPCService } from "@repo/trpc";
 
 async function bootstrap() {
-  // Create the application with verbose logging
+  // Create the application with minimal logging in production
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    logger: ["error", "warn", "log", "debug", "verbose"],
+    logger:
+      process.env.NODE_ENV === "production"
+        ? ["error", "warn"]
+        : ["error", "warn", "log", "debug", "verbose"],
+    // Improve startup performance
+    abortOnError: false,
+    bufferLogs: true,
   });
 
   const logger = new Logger("Bootstrap");
-  logger.log("Starting application...");
 
   // Get ConfigService instance
   const configService = app.get(ConfigService);
-  // Enable ValidationPipe globally (optional but recommended for request validation)
-  app.useGlobalPipes(new ValidationPipe());
+
+  // Enable ValidationPipe globally with performance optimizations
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: false,
+    })
+  );
 
   // Configure CORS
   app.enableCors({
@@ -30,16 +42,13 @@ async function bootstrap() {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   });
-  logger.log("CORS enabled");
 
   // Apply tRPC middleware
   const trpcService = app.get(TRPCService);
   trpcService.applyMiddleware(app);
-  logger.log("tRPC middleware applied");
 
   // Use getOrThrow - it expects the value to be defined
   // due to the validation schema having defaults.
-  // This should not throw an error unless something is very wrong.
   const port = configService.getOrThrow<number>("PORT");
 
   await app.listen(port);

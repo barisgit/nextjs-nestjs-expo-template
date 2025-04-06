@@ -23,6 +23,10 @@ export class BasicRouter {
         };
       }),
 
+    increment: protectedProcedure.input(z.number()).query(({ input }) => {
+      return input + 1;
+    }),
+
     // Me endpoint - protected (requires auth)
     me: protectedProcedure.query(({ ctx }) => {
       return {

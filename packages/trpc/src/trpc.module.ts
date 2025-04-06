@@ -1,14 +1,19 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
 import { TRPCService } from "./trpc.service.js";
+import { TRPCPanelController } from "./trpc-panel.controller.js";
+import { AuthService } from "@repo/services";
 import { AppRouterClass } from "./routers/index.js";
 import { BasicRouter } from "./routers/routers/basic.router.js";
 import { AuthRouter } from "./routers/routers/auth.router.js";
 import { ChatRoomRouter } from "./routers/routers/chatroom.router.js";
-import { AuthService } from "@repo/services";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
-  imports: [ConfigModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
   providers: [
     TRPCService,
     AppRouterClass,
@@ -18,5 +23,6 @@ import { AuthService } from "@repo/services";
     AuthService,
   ],
   exports: [TRPCService],
+  controllers: [TRPCPanelController],
 })
 export class TRPCModule {}

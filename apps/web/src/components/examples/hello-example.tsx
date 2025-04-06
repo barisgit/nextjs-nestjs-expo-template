@@ -2,14 +2,19 @@
 
 import { useState, type JSX } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@repo/ui/components/base/button";
 import { useTRPC } from "@/utils/trpc";
 
 export function HelloExample(): JSX.Element {
   const [name, setName] = useState("World");
   const trpc = useTRPC();
+  const [incrementCount, setIncrementCount] = useState(0);
+  const [queryStartTime, setQueryStartTime] = useState<number | null>(null);
 
   // Use tRPC query with TanStack Query
   const helloQuery = useQuery(trpc.hello.queryOptions({ name }));
+
+  const incrementQuery = useQuery(trpc.increment.queryOptions(incrementCount));
 
   // Get current user information
   const userQuery = useQuery(trpc.me.queryOptions());
@@ -21,6 +26,33 @@ export function HelloExample(): JSX.Element {
       return <p className="text-red-500">Error: {helloQuery.error.message}</p>;
     if (!helloQuery.data) return <p>No data available</p>;
     return <p>{helloQuery.data.greeting}</p>;
+  };
+
+  const renderIncrementQueryResult = (): JSX.Element => {
+    if (incrementQuery.isLoading) return <p>Loading...</p>;
+    if (incrementQuery.error)
+      return (
+        <p className="text-red-500">Error: {incrementQuery.error.message}</p>
+      );
+    if (!incrementQuery.data) return <p>No data available</p>;
+
+    const queryTime = queryStartTime ? Date.now() - queryStartTime : 0;
+
+    return (
+      <div className="space-y-2">
+        <p>Current Value: {incrementQuery.data}</p>
+        <p className="text-sm text-gray-500">Query time: {queryTime}ms</p>
+        <Button
+          onClick={() => {
+            setIncrementCount(incrementCount + 1);
+            setQueryStartTime(Date.now());
+            void incrementQuery.refetch();
+          }}
+        >
+          Increment
+        </Button>
+      </div>
+    );
   };
 
   const renderUserQueryResult = (): JSX.Element => {
@@ -72,6 +104,11 @@ export function HelloExample(): JSX.Element {
         <div className="p-3 bg-gray-50 rounded-md">
           <h3 className="font-medium mb-2">Query Result:</h3>
           {renderHelloQueryResult()}
+        </div>
+
+        <div className="p-3 bg-gray-50 rounded-md">
+          <h3 className="font-medium mb-2">Increment:</h3>
+          {renderIncrementQueryResult()}
         </div>
 
         <div className="p-3 bg-gray-50 rounded-md">

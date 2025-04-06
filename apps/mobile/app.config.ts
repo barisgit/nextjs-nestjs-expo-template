@@ -14,6 +14,8 @@ export const envSchema = z.object({
       (val) => !val.includes("clerk-publishable-key"),
       "Clerk publishable key cannot be a placeholder value"
     ),
+  EXPO_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
+  EXPO_PUBLIC_POSTHOG_HOST: z.string().url().default("https://app.posthog.com"),
 });
 
 // Validate environment variables immediately
@@ -23,6 +25,8 @@ function validateEnv() {
       EXPO_PUBLIC_TRPC_URL: process.env.EXPO_PUBLIC_TRPC_URL,
       EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY:
         process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      EXPO_PUBLIC_POSTHOG_KEY: process.env.EXPO_PUBLIC_POSTHOG_KEY,
+      EXPO_PUBLIC_POSTHOG_HOST: process.env.EXPO_PUBLIC_POSTHOG_HOST,
     });
     console.log("\x1b[32m%s\x1b[0m", "✅ Environment validation passed");
     return parsedEnv;
@@ -95,6 +99,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     EXPO_PUBLIC_TRPC_URL: process.env.EXPO_PUBLIC_TRPC_URL,
     EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    EXPO_PUBLIC_POSTHOG_KEY: process.env.EXPO_PUBLIC_POSTHOG_KEY,
+    EXPO_PUBLIC_POSTHOG_HOST:
+      process.env.EXPO_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
     eas: {
       projectId:
         process.env.EAS_PROJECT_ID || "e990666e-c30f-4c41-8abd-c5a562c79cdc",

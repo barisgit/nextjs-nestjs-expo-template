@@ -20,6 +20,10 @@ export const validationSchema = Joi.object({
   REDIS_PORT: Joi.number().default(6379),
   REDIS_PASSWORD: Joi.string().allow("").optional(),
 
+  // PostHog configuration
+  POSTHOG_API_KEY: Joi.string().required(),
+  POSTHOG_HOST: Joi.string().uri().default("https://app.posthog.com"),
+
   // Feature flags
   USE_REDIS_CACHING: Joi.boolean().default(true),
 });

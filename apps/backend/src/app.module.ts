@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module.js";
 // Import the TRPCModule and TRPCPanelController from our package
 import { TRPCModule, TRPCPanelController } from "@repo/trpc";
 import { WebsocketsModule } from "./websockets/websockets.module.js";
+import { AnalyticsModule } from "./services/analytics.module.js";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { WebsocketsModule } from "./websockets/websockets.module.js";
     AppConfigModule,
     AuthModule,
     WebsocketsModule,
+    AnalyticsModule,
   ],
   controllers: [TRPCPanelController],
   providers: [],

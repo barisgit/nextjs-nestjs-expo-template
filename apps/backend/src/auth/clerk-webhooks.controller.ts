@@ -10,12 +10,34 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { WebhookEvent } from "@clerk/express";
 import { Webhook } from "svix";
+import { PostHogService } from "../services/posthog.service.js";
+
+// TypeScript interfaces for the Clerk webhook data
+interface ClerkUserData {
+  id: string;
+  email_addresses?: Array<{
+    email_address: string;
+    verification?: { status: string };
+  }>;
+}
+
+interface ClerkSessionData {
+  id: string;
+  user_id: string;
+  device?: {
+    type?: string;
+    browser?: string;
+  };
+}
 
 @Controller("webhooks/clerk")
 export class ClerkWebhooksController {
   private readonly logger = new Logger(ClerkWebhooksController.name);
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private posthogService: PostHogService
+  ) {}
 
   @Post()
   handleWebhook(
@@ -83,6 +105,12 @@ export class ClerkWebhooksController {
     this.logger.log(`Received Clerk webhook: ${eventType}`);
     const event = body as unknown as WebhookEvent;
 
+    // Track the webhook event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture("system", "clerk_webhook_received", {
+      event_type: eventType,
+      webhook_id: svixId,
+    });
+
     // Process different webhook events
     switch (event.type) {
       case "user.created":
@@ -108,27 +136,84 @@ export class ClerkWebhooksController {
   }
 
   private handleUserCreated(event: WebhookEvent): void {
-    this.logger.log(`User created: ${event.data.id}`);
+    // Type assertion for user data
+    const userData = event.data as ClerkUserData;
+    const userId = userData.id;
+    this.logger.log(`User created: ${userId}`);
+
+    // Track user creation event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture(userId, "user_created", {
+      source: "clerk_webhook",
+      user_id: userId,
+      email_verified:
+        userData.email_addresses?.[0]?.verification?.status === "verified",
+    });
+
     // Here you can add logic to create or sync a user in your database
   }
 
   private handleUserUpdated(event: WebhookEvent): void {
-    this.logger.log(`User updated: ${event.data.id}`);
+    // Type assertion for user data
+    const userData = event.data as ClerkUserData;
+    const userId = userData.id;
+    this.logger.log(`User updated: ${userId}`);
+
+    // Track user update event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture(userId, "user_updated", {
+      source: "clerk_webhook",
+      user_id: userId,
+      update_type: "profile",
+    });
+
     // Here you can add logic to update user data in your database
   }
 
   private handleUserDeleted(event: WebhookEvent): void {
-    this.logger.log(`User deleted: ${event.data.id}`);
+    // Type assertion for user data
+    const userData = event.data as ClerkUserData;
+    const userId = userData.id;
+    this.logger.log(`User deleted: ${userId}`);
+
+    // Track user deletion event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture("system", "user_deleted", {
+      source: "clerk_webhook",
+      user_id: userId,
+    });
+
     // Here you can add logic to delete a user from your database
   }
 
   private handleSessionCreated(event: WebhookEvent): void {
-    this.logger.log(`Session created: ${event.data.id}`);
+    // Type assertion for session data
+    const sessionData = event.data as ClerkSessionData;
+    const sessionId = sessionData.id;
+    const userId = sessionData.user_id;
+    this.logger.log(`Session created: ${sessionId} for user ${userId}`);
+
+    // Track session creation event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture(userId, "user_login", {
+      source: "clerk_webhook",
+      session_id: sessionId,
+      device_type: sessionData.device?.type,
+      browser: sessionData.device?.browser,
+    });
+
     // Here you can track user sessions
   }
 
   private handleSessionRemoved(event: WebhookEvent): void {
-    this.logger.log(`Session removed: ${event.data.id}`);
+    // Type assertion for session data
+    const sessionData = event.data as ClerkSessionData;
+    const sessionId = sessionData.id;
+    const userId = sessionData.user_id;
+    this.logger.log(`Session removed: ${sessionId} for user ${userId}`);
+
+    // Track session removal event in PostHog - use void to explicitly ignore any promises
+    void this.posthogService.capture(userId, "user_logout", {
+      source: "clerk_webhook",
+      session_id: sessionId,
+    });
+
     // Here you can clean up any session-related data
   }
 }

@@ -68,3 +68,7 @@ packages/
 ## Development
 
 This project uses a Turborepo monorepo structure with TypeScript throughout the stack.
+
+### Analytics Setup
+
+For setting up and using PostHog analytics in all applications, see the [PostHog Setup Guide](docs/POSTHOG_SETUP.md).

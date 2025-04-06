@@ -13,6 +13,7 @@ import { SafeAreaWrapper } from "./components/SafeAreaWrapper";
 import { TRPCProvider } from "./providers/TRPCProvider";
 import { HelloExample } from "./components/HelloExample";
 import { CustomClerkProvider } from "./providers/ClerkProvider";
+import { PostHogProvider } from "./providers/PostHogProvider";
 import { ClerkAuth } from "./components/ClerkAuth";
 import { TamaguiProvider } from "tamagui";
 import config from "./tamagui.config";
@@ -88,32 +89,34 @@ export default function App() {
     <ErrorBoundary>
       <TamaguiProvider config={config} defaultTheme={colorScheme || "light"}>
         <CustomClerkProvider>
-          <TRPCProvider>
-            <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
-              <ScrollView contentContainerStyle={styles.scrollView}>
-                <StatusBar style="auto" />
-                <View style={styles.container}>
-                  <Text style={styles.title}>Mobile App</Text>
-                  <Text style={styles.subtitle}>Welcome to the demo app</Text>
+          <PostHogProvider>
+            <TRPCProvider>
+              <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
+                <ScrollView contentContainerStyle={styles.scrollView}>
+                  <StatusBar style="auto" />
+                  <View style={styles.container}>
+                    <Text style={styles.title}>Mobile App</Text>
+                    <Text style={styles.subtitle}>Welcome to the demo app</Text>
 
-                  <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Authentication:</Text>
-                    <ClerkAuth />
-                  </View>
+                    <View style={styles.section}>
+                      <Text style={styles.sectionTitle}>Authentication:</Text>
+                      <ClerkAuth />
+                    </View>
 
-                  <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>tRPC Demo:</Text>
-                    <HelloExample />
-                  </View>
+                    <View style={styles.section}>
+                      <Text style={styles.sectionTitle}>tRPC Demo:</Text>
+                      <HelloExample />
+                    </View>
 
-                  <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
-                    <TamaguiDemo />
+                    <View style={styles.section}>
+                      <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
+                      <TamaguiDemo />
+                    </View>
                   </View>
-                </View>
-              </ScrollView>
-            </SafeAreaWrapper>
-          </TRPCProvider>
+                </ScrollView>
+              </SafeAreaWrapper>
+            </TRPCProvider>
+          </PostHogProvider>
         </CustomClerkProvider>
       </TamaguiProvider>
     </ErrorBoundary>

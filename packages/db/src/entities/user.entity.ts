@@ -17,6 +17,9 @@ export class User {
   @Column({ unique: true, length: 255 })
   email: string;
 
+  @Column({ nullable: true, length: 255 })
+  clerkUserId: string;
+
   // Add password hash later if needed
   // @Column()
   // passwordHash: string;

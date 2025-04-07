@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { clerkClient } from "@clerk/express";
+import { PostHogService } from "@repo/analytics";
 
 // Define a type for Clerk API errors
 interface ClerkAPIError {
@@ -13,7 +13,7 @@ interface ClerkAPIError {
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
 
-  constructor(private configService: ConfigService) {}
+  constructor(private readonly analyticsService?: PostHogService) {}
 
   async validateSession(sessionToken: string): Promise<boolean> {
     try {
@@ -35,6 +35,27 @@ export class AuthService {
         this.logger.log(
           `Session validation result: ${isValid ? "valid" : "invalid"}, status: ${session?.status || "null"}`
         );
+
+        // If analytics service is available and session is valid, track the event
+        if (isValid && this.analyticsService && session.userId) {
+          try {
+            await this.analyticsService.capture(
+              session.userId,
+              "session_validated",
+              {
+                source: "auth_service",
+                valid: true,
+                timestamp: new Date().toISOString(),
+              }
+            );
+          } catch (err) {
+            // Don't let analytics errors affect the main functionality
+            this.logger.error(
+              `Failed to track session validation: ${err instanceof Error ? err.message : String(err)}`
+            );
+          }
+        }
+
         return isValid;
       } catch (error: unknown) {
         // Handle specific Clerk API errors
@@ -69,6 +90,23 @@ export class AuthService {
   async getUserById(userId: string) {
     try {
       const user = await clerkClient.users.getUser(userId);
+
+      // Track the user lookup event if analytics service is available
+      if (this.analyticsService && user) {
+        try {
+          await this.analyticsService.capture(userId, "user_lookup", {
+            source: "auth_service",
+            success: true,
+            timestamp: new Date().toISOString(),
+          });
+        } catch (err) {
+          // Don't let analytics errors affect the main functionality
+          this.logger.error(
+            `Failed to track user lookup: ${err instanceof Error ? err.message : String(err)}`
+          );
+        }
+      }
+
       return user;
     } catch (error: unknown) {
       const errorMessage =
@@ -92,7 +130,29 @@ export class AuthService {
       try {
         const session = await clerkClient.sessions.getSession(sessionId);
         if (session && session.userId) {
-          return this.getUserById(session.userId);
+          const user = await this.getUserById(session.userId);
+
+          // Track the token lookup event if analytics service is available
+          if (this.analyticsService && user) {
+            try {
+              await this.analyticsService.capture(
+                session.userId,
+                "user_from_token_lookup",
+                {
+                  source: "auth_service",
+                  success: true,
+                  timestamp: new Date().toISOString(),
+                }
+              );
+            } catch (err) {
+              // Don't let analytics errors affect the main functionality
+              this.logger.error(
+                `Failed to track token lookup: ${err instanceof Error ? err.message : String(err)}`
+              );
+            }
+          }
+
+          return user;
         }
 
         this.logger.warn(`No user ID found in session`);
@@ -131,6 +191,11 @@ export class AuthService {
       }
 
       // Decode the payload (middle part)
+      if (!parts[1]) {
+        this.logger.warn("JWT payload part is missing");
+        return null;
+      }
+
       const payload = JSON.parse(
         Buffer.from(parts[1], "base64").toString()
       ) as {

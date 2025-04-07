@@ -23,14 +23,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
     "ignoreDeprecations": "5.0",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@repo/db/*": ["../../packages/db/src/*"],
-      "@repo/services/*": ["../../packages/services/src/*"],
-      "@repo/trpc/*": ["../../packages/trpc/src/*"],
-      "@repo/websocket-types/*": ["../../packages/websocket-types/src/*"],
-      "@repo/eslint-config/*": ["../../packages/eslint-config/src/*"]
-    }
+    "preserveSymlinks": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "src/@generated"]

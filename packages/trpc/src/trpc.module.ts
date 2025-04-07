@@ -7,12 +7,14 @@ import { BasicRouter } from "./routers/routers/basic.router.js";
 import { AuthRouter } from "./routers/routers/auth.router.js";
 import { ChatRoomRouter } from "./routers/routers/chatroom.router.js";
 import { ConfigModule } from "@nestjs/config";
+import { PostHogModule } from "@repo/analytics";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    PostHogModule,
   ],
   providers: [
     TRPCService,

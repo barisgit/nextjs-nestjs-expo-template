@@ -4,7 +4,6 @@ import {
   TRPCProvider as GeneratedTRPCProvider,
   createQueryClient,
   createTRPCClient,
-  useTRPCClient,
 } from "../utils/trpc";
 import { useAuth } from "@clerk/clerk-expo";
 import { type TRPCClient } from "@trpc/client";

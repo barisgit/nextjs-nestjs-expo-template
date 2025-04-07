@@ -22,7 +22,7 @@ interface PostHogProviderProps {
 }
 
 // User identification component to handle Clerk auth integration
-function PostHogUserIdentification() {
+function PostHogUserIdentification(): JSX.Element | null {
   const { user, isSignedIn } = useUser();
   const posthogClient = usePostHog();
 
@@ -43,7 +43,7 @@ function PostHogUserIdentification() {
 }
 
 // Page view tracking component
-function PostHogPageView() {
+function PostHogPageView(): JSX.Element | null {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const posthogClient = usePostHog();
@@ -63,7 +63,7 @@ function PostHogPageView() {
 }
 
 // Suspense wrapper for PostHogPageView to prevent client-side rendering opt-out
-function SuspendedTracking() {
+function SuspendedTracking(): JSX.Element {
   return (
     <Suspense fallback={null}>
       <PostHogPageView />

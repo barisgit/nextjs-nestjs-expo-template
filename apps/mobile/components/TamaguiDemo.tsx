@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, H2, Paragraph, View, Input, Stack } from "tamagui";
+import { Button, Card, H2, Paragraph, View, Input } from "tamagui";
 
 export function TamaguiDemo() {
   const [count, setCount] = useState(0);

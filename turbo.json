@@ -8,7 +8,9 @@
     "DB_PASSWORD",
     "DB_DATABASE",
     "NODE_ENV",
-    "PORT"
+    "PORT",
+    "POSTHOG_API_KEY",
+    "POSTHOG_HOST"
   ],
   "ui": "stream",
   "tasks": {
@@ -20,7 +22,6 @@
       "dependsOn": ["^build"]
     },
     "dev": {
-      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },

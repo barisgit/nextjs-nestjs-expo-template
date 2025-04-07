@@ -36,7 +36,7 @@ export class WebsocketService {
 
     // Add socket to room
     await socket.join(roomId);
-    this.rooms.get(roomId)?.add(socket.id);
+    this.rooms.get(roomId)?.add(socket.id as string);
     this.logger.log(`Socket ${socket.id} joined room ${roomId}`);
 
     // Update socket data
@@ -77,7 +77,7 @@ export class WebsocketService {
 
     // Remove socket from room
     await socket.leave(roomId);
-    this.rooms.get(roomId)?.delete(socket.id);
+    this.rooms.get(roomId)?.delete(socket.id as string);
 
     // Update socket data
     socket.data.joinedRooms = socket.data.joinedRooms.filter(
@@ -118,9 +118,9 @@ export class WebsocketService {
     }
 
     // Get the sender info
-    const senderId = socket.data.userId || socket.id;
+    const senderId = socket.data.userId || (socket.id as string);
     const senderName =
-      socket.data.username || `User ${socket.id.substring(0, 4)}`;
+      socket.data.username || `User ${(socket.id as string).substring(0, 4)}`;
 
     // Log room members
     const roomMembers = this.getUsersInRoom(roomId);
@@ -196,8 +196,10 @@ export class WebsocketService {
         | undefined;
       if (socket) {
         users.push({
-          id: socket.data.userId || socket.id,
-          username: socket.data.username || `User ${socket.id.substring(0, 4)}`,
+          id: socket.data.userId || (socket.id as string),
+          username:
+            socket.data.username ||
+            `User ${(socket.id as string).substring(0, 4)}`,
         });
       }
     }

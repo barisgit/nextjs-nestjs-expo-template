@@ -4,12 +4,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["../ui/src/*"],
-      "@repo/backend/*": ["../backend/src/*"],
-      "@repo/web/*": ["../web/src/*"],
-      "@repo/mobile/*": ["../mobile/src/*"],
-      "@repo/api-client/*": ["../api-client/src/*"],
-      "@repo/db/*": ["../db/src/*"]
+      "@/*": ["./*"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/backend/*": ["../../apps/backend/src/*"],
+      "@repo/web/*": ["../../apps/web/src/*"],
+      "@repo/mobile/*": ["../../apps/mobile/src/*"],
+      "@repo/api-client/*": ["../../packages/api-client/src/*"],
+      "@repo/db/*": ["../../packages/db/src/*"],
+      "@repo/services/*": ["../../packages/services/src/*"],
+      "@repo/trpc/*": ["../../packages/trpc/src/*"],
+      "@repo/websocket-types/*": ["../../packages/websocket-types/src/*"],
+      "@repo/eslint-config/*": ["../../packages/eslint-config/src/*"],
+      "@repo/analytics/*": ["../../packages/analytics/src/*"]
     },
     "declaration": true,
     "declarationMap": true,

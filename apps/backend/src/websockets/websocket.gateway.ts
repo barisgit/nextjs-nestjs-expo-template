@@ -11,6 +11,7 @@ import {
   type TypedServerSocket,
   ClientEvents,
   MessagePayloadSchema,
+  SocketResponse,
   createValidatedHandler,
   typedEmit,
 } from "@repo/websocket-types";
@@ -41,9 +42,21 @@ export class WebsocketGateway
 
   handleConnection(client: TypedServerSocket) {
     this.logger.log(`Client connected: ${client.id}`);
-    this.logger.debug(`Client transport: ${client.conn.transport.name}`);
+    this.logger.debug(`Client connection type: ${typeof client.conn}`);
+
+    // Socket.io is not typed, so we need to check the type of the conn property
     this.logger.debug(
-      `Client handshake: ${JSON.stringify(client.handshake.query)}`
+      `Client transport: ${
+        client.conn &&
+        typeof client.conn === "object" &&
+        "transport" in client.conn
+          ? ((client.conn as { transport?: { name?: string } }).transport
+              ?.name ?? "unknown")
+          : "unknown"
+      }`
+    );
+    this.logger.debug(
+      `Client handshake: ${JSON.stringify(client.handshake?.query)}`
     );
 
     // Set up validated handlers
@@ -90,7 +103,7 @@ export class WebsocketGateway
           this.logger.debug(
             `JOIN_ROOM successful for room: ${roomId}, response: ${JSON.stringify(response)}`
           );
-          if (callback) callback(response);
+          if (callback) callback(response as SocketResponse);
         } catch (error) {
           this.logger.error(`JOIN_ROOM failed for room: ${roomId}`, error);
           if (callback) {
@@ -110,10 +123,10 @@ export class WebsocketGateway
       async (roomId, socket, callback) => {
         try {
           const success = await this.websocketService.leaveRoom(socket, roomId);
-          if (callback) callback(success);
+          if (callback) callback({ success });
         } catch (error) {
           void error;
-          if (callback) callback(false);
+          if (callback) callback({ success: false });
         }
       }
     );
@@ -134,10 +147,10 @@ export class WebsocketGateway
           this.logger.log(
             `Message broadcast success: ${success}, to room: ${payload.roomId}`
           );
-          if (callback) callback(success);
+          if (callback) callback({ success });
         } catch (error) {
           this.logger.error(`Error in SEND_MESSAGE handler:`, error);
-          if (callback) callback(false);
+          if (callback) callback({ success: false });
           typedEmit(socket, "error", {
             code: "MESSAGE_ERROR",
             message:

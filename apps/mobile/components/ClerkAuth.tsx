@@ -9,7 +9,6 @@ import {
   Platform,
 } from "react-native";
 import { useAuth, useSignIn, useSignUp } from "@clerk/clerk-expo";
-import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useQueryClient } from "@tanstack/react-query";
 

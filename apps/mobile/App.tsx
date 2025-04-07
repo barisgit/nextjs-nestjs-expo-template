@@ -1,6 +1,6 @@
 import "./tamagui-web.css";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, ReactNode, ErrorInfo } from "react";
+import React, { useEffect, ReactNode, ErrorInfo, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -63,27 +63,25 @@ class ErrorBoundary extends React.Component<
 export default function App() {
   const colorScheme = useColorScheme();
 
-  const [fontsLoaded] = useFonts({
+  const [appReady, setAppReady] = useState(false);
+
+  const [fontsLoaded, fontError] = useFonts({
     Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
     InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
   });
 
-  const handleRefresh = () => {
-    console.log("Profile refreshed");
-  };
-
   useEffect(() => {
+    if (fontsLoaded || fontError) {
+      setAppReady(true);
+    }
+
     console.log("[App] Mounted - React version:", React.version);
     console.log("[App] Platform:", Platform.OS, Platform.Version);
-  }, []);
-
-  if (!fontsLoaded) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading fonts...</Text>
-      </View>
-    );
-  }
+    console.log("[App] Fonts loaded:", fontsLoaded);
+    if (fontError) {
+      console.warn("[App] Font loading error:", fontError);
+    }
+  }, [fontsLoaded, fontError]);
 
   return (
     <ErrorBoundary>
@@ -92,28 +90,36 @@ export default function App() {
           <PostHogProvider>
             <TRPCProvider>
               <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
-                <ScrollView contentContainerStyle={styles.scrollView}>
-                  <StatusBar style="auto" />
+                <StatusBar style="auto" />
+                {!appReady ? (
                   <View style={styles.container}>
-                    <Text style={styles.title}>Mobile App</Text>
-                    <Text style={styles.subtitle}>Welcome to the demo app</Text>
-
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>Authentication:</Text>
-                      <ClerkAuth />
-                    </View>
-
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>tRPC Demo:</Text>
-                      <HelloExample />
-                    </View>
-
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
-                      <TamaguiDemo />
-                    </View>
+                    <Text style={styles.loadingText}>Loading app...</Text>
                   </View>
-                </ScrollView>
+                ) : (
+                  <ScrollView contentContainerStyle={styles.scrollView}>
+                    <View style={styles.container}>
+                      <Text style={styles.title}>Mobile App</Text>
+                      <Text style={styles.subtitle}>
+                        Welcome to the demo app
+                      </Text>
+
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Authentication:</Text>
+                        <ClerkAuth />
+                      </View>
+
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>tRPC Demo:</Text>
+                        <HelloExample />
+                      </View>
+
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
+                        <TamaguiDemo />
+                      </View>
+                    </View>
+                  </ScrollView>
+                )}
               </SafeAreaWrapper>
             </TRPCProvider>
           </PostHogProvider>
@@ -181,5 +187,10 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 20,
     marginTop: 20,
+  },
+  loadingText: {
+    fontSize: 18,
+    color: "#666",
+    marginBottom: 10,
   },
 });

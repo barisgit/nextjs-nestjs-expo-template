@@ -1,19 +1,22 @@
 import {
-  Controller,
-  Post,
-  Body,
-  Headers,
+  Injectable,
+  Logger,
   BadRequestException,
   UnauthorizedException,
-  Logger,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { WebhookEvent } from "@clerk/express";
 import { Webhook } from "svix";
-import { PostHogService } from "../services/posthog.service.js";
+import { PostHogService } from "@repo/analytics";
 
-// TypeScript interfaces for the Clerk webhook data
-interface ClerkUserData {
+/**
+ * TypeScript interfaces for the Clerk webhook data
+ */
+export interface WebhookEvent {
+  type: string;
+  data: unknown;
+}
+
+export interface ClerkUserData {
   id: string;
   email_addresses?: Array<{
     email_address: string;
@@ -21,7 +24,7 @@ interface ClerkUserData {
   }>;
 }
 
-interface ClerkSessionData {
+export interface ClerkSessionData {
   id: string;
   user_id: string;
   device?: {
@@ -30,28 +33,43 @@ interface ClerkSessionData {
   };
 }
 
-@Controller("webhooks/clerk")
-export class ClerkWebhooksController {
-  private readonly logger = new Logger(ClerkWebhooksController.name);
+/**
+ * Service for processing Clerk webhook events
+ */
+@Injectable()
+export class ClerkWebhooksService {
+  private readonly logger = new Logger(ClerkWebhooksService.name);
 
   constructor(
-    private configService: ConfigService,
-    private posthogService: PostHogService
+    private readonly configService: ConfigService,
+    private readonly posthogService: PostHogService
   ) {}
 
-  @Post()
-  handleWebhook(
-    @Headers("svix-id") svixId: string,
-    @Headers("svix-timestamp") svixTimestamp: string,
-    @Headers("svix-signature") svixSignature: string,
-    @Body() body: Record<string, unknown>
-  ) {
+  /**
+   * Process a Clerk webhook event
+   *
+   * @param svixId - The Svix ID header
+   * @param svixTimestamp - The Svix timestamp header
+   * @param svixSignature - The Svix signature header
+   * @param body - The webhook payload
+   * @returns Object with received status
+   */
+  processWebhook(
+    svixId: string,
+    svixTimestamp: string,
+    svixSignature: string,
+    body: Record<string, unknown>
+  ): { received: boolean } {
     // Log the raw webhook headers
     this.logger.debug(`Webhook received with headers:
       svix-id: ${svixId}
       svix-timestamp: ${svixTimestamp}
       svix-signature: ${svixSignature}
     `);
+
+    this.logger.debug(
+      `Received Clerk webhook with body of type ${typeof body}`
+    );
 
     if (!svixId || !svixTimestamp || !svixSignature) {
       throw new BadRequestException("Missing Svix headers");
@@ -61,6 +79,11 @@ export class ClerkWebhooksController {
     const webhookSecret = this.configService.get<string>(
       "CLERK_WEBHOOK_SECRET"
     );
+
+    // ---- TEMPORARY DEBUG LOG ----
+    this.logger.debug(`Retrieved CLERK_WEBHOOK_SECRET: '${webhookSecret}'`);
+    // -----------------------------
+
     if (!webhookSecret) {
       this.logger.error("CLERK_WEBHOOK_SECRET is not set");
       throw new BadRequestException("Webhook secret not configured");
@@ -105,8 +128,8 @@ export class ClerkWebhooksController {
     this.logger.log(`Received Clerk webhook: ${eventType}`);
     const event = body as unknown as WebhookEvent;
 
-    // Track the webhook event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture("system", "clerk_webhook_received", {
+    // Track the webhook event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking("system", "clerk_webhook_received", {
       event_type: eventType,
       webhook_id: svixId,
     });
@@ -135,14 +158,18 @@ export class ClerkWebhooksController {
     return { received: true };
   }
 
+  /**
+   * Handle user created events
+   * @param event - The webhook event
+   */
   private handleUserCreated(event: WebhookEvent): void {
     // Type assertion for user data
     const userData = event.data as ClerkUserData;
     const userId = userData.id;
     this.logger.log(`User created: ${userId}`);
 
-    // Track user creation event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture(userId, "user_created", {
+    // Track user creation event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking(userId, "user_created", {
       source: "clerk_webhook",
       user_id: userId,
       email_verified:
@@ -152,14 +179,18 @@ export class ClerkWebhooksController {
     // Here you can add logic to create or sync a user in your database
   }
 
+  /**
+   * Handle user updated events
+   * @param event - The webhook event
+   */
   private handleUserUpdated(event: WebhookEvent): void {
     // Type assertion for user data
     const userData = event.data as ClerkUserData;
     const userId = userData.id;
     this.logger.log(`User updated: ${userId}`);
 
-    // Track user update event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture(userId, "user_updated", {
+    // Track user update event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking(userId, "user_updated", {
       source: "clerk_webhook",
       user_id: userId,
       update_type: "profile",
@@ -168,14 +199,18 @@ export class ClerkWebhooksController {
     // Here you can add logic to update user data in your database
   }
 
+  /**
+   * Handle user deleted events
+   * @param event - The webhook event
+   */
   private handleUserDeleted(event: WebhookEvent): void {
     // Type assertion for user data
     const userData = event.data as ClerkUserData;
     const userId = userData.id;
     this.logger.log(`User deleted: ${userId}`);
 
-    // Track user deletion event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture("system", "user_deleted", {
+    // Track user deletion event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking("system", "user_deleted", {
       source: "clerk_webhook",
       user_id: userId,
     });
@@ -183,6 +218,10 @@ export class ClerkWebhooksController {
     // Here you can add logic to delete a user from your database
   }
 
+  /**
+   * Handle session created events
+   * @param event - The webhook event
+   */
   private handleSessionCreated(event: WebhookEvent): void {
     // Type assertion for session data
     const sessionData = event.data as ClerkSessionData;
@@ -190,8 +229,8 @@ export class ClerkWebhooksController {
     const userId = sessionData.user_id;
     this.logger.log(`Session created: ${sessionId} for user ${userId}`);
 
-    // Track session creation event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture(userId, "user_login", {
+    // Track session creation event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking(userId, "user_login", {
       source: "clerk_webhook",
       session_id: sessionId,
       device_type: sessionData.device?.type,
@@ -201,6 +240,10 @@ export class ClerkWebhooksController {
     // Here you can track user sessions
   }
 
+  /**
+   * Handle session removed events
+   * @param event - The webhook event
+   */
   private handleSessionRemoved(event: WebhookEvent): void {
     // Type assertion for session data
     const sessionData = event.data as ClerkSessionData;
@@ -208,8 +251,8 @@ export class ClerkWebhooksController {
     const userId = sessionData.user_id;
     this.logger.log(`Session removed: ${sessionId} for user ${userId}`);
 
-    // Track session removal event in PostHog - use void to explicitly ignore any promises
-    void this.posthogService.capture(userId, "user_logout", {
+    // Track session removal event in PostHog - using non-blocking method
+    this.posthogService.captureNonBlocking(userId, "user_logout", {
       source: "clerk_webhook",
       session_id: sessionId,
     });

@@ -9,9 +9,6 @@ module.exports = [
   // Add backend-specific rules and settings
   {
     files: ["src/**/*.ts"], // Apply only to TypeScript files in src
-    plugins: {
-      import: importPlugin, // Register the plugin
-    },
     rules: {
       // Disable the faulty import/extensions rule as it conflicts with ESM .js requirement
       "import/extensions": "off",

@@ -9,7 +9,10 @@
     { "directory": "apps/mobile", "changeProcessCwd": true },
     { "directory": "packages/ui", "changeProcessCwd": true },
     { "directory": "packages/tsconfig", "changeProcessCwd": true },
-    { "directory": "packages/eslint-config", "changeProcessCwd": true }
+    { "directory": "packages/eslint-config", "changeProcessCwd": true },
+    { "directory": "packages/analytics", "changeProcessCwd": true },
+    { "directory": "packages/services", "changeProcessCwd": true },
+    { "directory": "packages/db", "changeProcessCwd": true }
   ],
   "eslint.validate": [
     "javascript",

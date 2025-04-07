@@ -8,4 +8,10 @@ export default defineConfig({
   sourcemap: true,
   splitting: false,
   treeshake: true,
+  external: ["@nestjs/common", "@nestjs/config"],
+  outExtension({ format }) {
+    return {
+      js: format === "esm" ? ".js" : ".cjs",
+    };
+  },
 });

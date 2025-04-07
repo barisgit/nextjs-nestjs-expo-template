@@ -11,6 +11,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -25,11 +30,19 @@
   "dependencies": {
     "@clerk/express": "^1.4.0",
     "@nestjs/common": "^11.0.13",
-    "@nestjs/config": "^4.0.2"
+    "@nestjs/config": "^4.0.2",
+    "@clerk/clerk-sdk-node": "^5.1.6",
+    "ioredis": "^5.6.0",
+    "posthog-node": "^4.11.1",
+    "@repo/analytics": "workspace:*",
+    "svix": "^1.63.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "eslint": "^8.57.0",
     "tsup": "^8.4.0",

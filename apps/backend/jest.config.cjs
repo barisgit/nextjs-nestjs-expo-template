@@ -23,4 +23,7 @@ module.exports = {
   coverageDirectory: "../coverage",
   testRegex: ".*\\.spec\\.ts$",
   transformIgnorePatterns: ["/node_modules/(?!(@repo))"],
+  forceExit: true,
+  detectOpenHandles: true,
+  testTimeout: 10000,
 };

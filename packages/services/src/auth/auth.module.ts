@@ -1,12 +1,14 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { AuthService } from "@repo/services";
+import { AuthService } from "./auth.service.js";
 import { ClerkAuthGuard } from "./clerk-auth.guard.js";
-import { ClerkWebhooksController } from "./clerk-webhooks.controller.js";
+import { PostHogModule } from "@repo/analytics";
 
+/**
+ * Module for providing authentication services
+ */
 @Module({
-  imports: [ConfigModule],
-  controllers: [ClerkWebhooksController],
+  imports: [ConfigModule, PostHogModule],
   providers: [AuthService, ClerkAuthGuard],
   exports: [AuthService, ClerkAuthGuard],
 })

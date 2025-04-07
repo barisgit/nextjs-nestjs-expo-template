@@ -7,7 +7,7 @@ import {
   RoomUpdatePayload,
   ServerEvents,
   typedBroadcast,
-} from "@repo/websocket-types";
+} from "../index.js";
 
 @Injectable()
 export class WebsocketService {

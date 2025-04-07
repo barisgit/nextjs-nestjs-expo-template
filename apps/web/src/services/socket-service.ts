@@ -10,7 +10,7 @@ import {
   type RoomUpdatePayload,
   type NotificationPayload,
   type ChatMessagePayload,
-} from "@repo/websocket-types";
+} from "@repo/websockets";
 import { env } from "@/env";
 import { logger } from "@/utils/logger";
 

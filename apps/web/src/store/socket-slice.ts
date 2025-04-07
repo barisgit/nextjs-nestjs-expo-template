@@ -9,7 +9,7 @@ import {
   type NotificationPayload,
   type ErrorPayload,
   type ChatMessagePayload,
-} from "@repo/websocket-types";
+} from "@repo/websockets";
 import * as socketService from "@/services/socket-service";
 
 // State interfaces

@@ -3,7 +3,7 @@
 import { useState, type JSX } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@repo/ui/components/base/button";
-import { type JoinRoomResponse, ClientEvents } from "@repo/websocket-types";
+import { type JoinRoomResponse, ClientEvents } from "@repo/websockets";
 import { useTRPC } from "@/utils/trpc";
 import { useChatRoom } from "@/hooks/use-socket";
 import { getSocket } from "@/services/socket-service";

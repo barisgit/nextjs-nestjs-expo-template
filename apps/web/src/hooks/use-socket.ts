@@ -7,7 +7,7 @@ import {
   type ErrorPayload,
   type NotificationPayload,
   type JoinRoomResponse,
-} from "@repo/websocket-types";
+} from "@repo/websockets";
 import { type AppDispatch, type RootState } from "@/store";
 import {
   initializeSocketConnection,

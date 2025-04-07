@@ -30,7 +30,7 @@
     "@repo/db": "workspace:*",
     "@repo/services": "workspace:*",
     "@repo/trpc": "workspace:*",
-    "@repo/websocket-types": "workspace:*",
+    "@repo/websockets": "workspace:*",
     "@trpc/server": "^11.0.2",
     "@types/socket.io": "^3.0.2",
     "class-transformer": "^0.5.1",

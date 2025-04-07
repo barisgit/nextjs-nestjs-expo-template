@@ -8,7 +8,7 @@
       "@/*": ["./*"],
       "@repo/ui/*": ["../ui/src/*"],
       "@repo/backend/*": ["../backend/src/*"],
-      "@repo/websocket-types/*": ["../websocket-types/src/*"],
+      "@repo/websockets/*": ["../websockets/src/*"],
       "@repo/trpc/*": ["../trpc/src/*"]
     }
   },

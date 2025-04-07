@@ -1,7 +1,7 @@
 "use client";
 
 import { type JSX } from "react";
-import { type JoinRoomResponse } from "@repo/websocket-types";
+import { type JoinRoomResponse } from "@repo/websockets";
 import { ChatRoom } from "@/components/chat/chat-room";
 import { RoomSelector } from "@/components/chat/room-selector";
 import { useChatRoom } from "@/hooks/use-socket";

@@ -84,7 +84,7 @@ export function createSocket(
  *
  * ```typescript
  * // In your React/Vue/etc component
- * import { createSocket } from '@repo/websocket-types';
+ * import { createSocket } from '@repo/websockets';
  *
  * // Create a typed socket connection
  * const socket = createSocket('http://localhost:3000');

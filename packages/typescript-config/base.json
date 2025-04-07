@@ -13,7 +13,7 @@
       "@repo/db/*": ["../../packages/db/src/*"],
       "@repo/services/*": ["../../packages/services/src/*"],
       "@repo/trpc/*": ["../../packages/trpc/src/*"],
-      "@repo/websocket-types/*": ["../../packages/websocket-types/src/*"],
+      "@repo/websockets/*": ["../../packages/websockets/src/*"],
       "@repo/eslint-config/*": ["../../packages/eslint-config/src/*"],
       "@repo/analytics/*": ["../../packages/analytics/src/*"]
     },

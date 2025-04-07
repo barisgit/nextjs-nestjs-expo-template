@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent, useRef, useEffect, type JSX } from "react";
 import { Button } from "@repo/ui/components/base/button";
-import { type JoinRoomResponse } from "@repo/websocket-types";
+import { type JoinRoomResponse } from "@repo/websockets";
 import {
   useChatRoom,
   useSocketStatus,

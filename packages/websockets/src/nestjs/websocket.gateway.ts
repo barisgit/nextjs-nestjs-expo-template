@@ -14,7 +14,7 @@ import {
   SocketResponse,
   createValidatedHandler,
   typedEmit,
-} from "@repo/websocket-types";
+} from "../index.js";
 import { WebsocketService } from "./websocket.service.js";
 
 @WebSocketGateway({

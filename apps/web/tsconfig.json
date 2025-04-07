@@ -12,7 +12,7 @@
       "@repo/backend/*": ["../../apps/backend/src/*"],
       "@repo/ui/*": ["../../packages/ui/src/*"],
       "@repo/api-client/*": ["../../packages/api-client/src/*"],
-      "@repo/websocket-types/*": ["../../packages/websocket-types/src/*"]
+      "@repo/websockets/*": ["../../packages/websockets/src/*"]
     }
   },
   "include": [

@@ -8,12 +8,15 @@ import {
   ScrollView,
   Platform,
   useColorScheme,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaWrapper } from "./components/SafeAreaWrapper";
 import { TRPCProvider } from "./providers/TRPCProvider";
 import { HelloExample } from "./components/HelloExample";
+import { ChatDemo } from "./components/ChatDemo";
 import { CustomClerkProvider } from "./providers/ClerkProvider";
 import { PostHogProvider } from "./providers/PostHogProvider";
+import { ReduxProvider } from "./providers/ReduxProvider";
 import { ClerkAuth } from "./components/ClerkAuth";
 import { TamaguiProvider } from "tamagui";
 import config from "./tamagui.config";
@@ -62,8 +65,8 @@ class ErrorBoundary extends React.Component<
 
 export default function App() {
   const colorScheme = useColorScheme();
-
   const [appReady, setAppReady] = useState(false);
+  const [activeView, setActiveView] = useState<"main" | "chat">("main");
 
   const [fontsLoaded, fontError] = useFonts({
     Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
@@ -83,63 +86,113 @@ export default function App() {
     }
   }, [fontsLoaded, fontError]);
 
+  const renderMainContent = () => (
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Mobile App</Text>
+        <Text style={styles.subtitle}>Welcome to the demo app</Text>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Authentication:</Text>
+          <ClerkAuth />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>tRPC Demo:</Text>
+          <HelloExample />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Chat Demo:</Text>
+          <View style={styles.chatPreview}>
+            <Text>Open the chat interface to start messaging</Text>
+            <Button
+              onPress={() => setActiveView("chat")}
+              style={styles.chatButton}
+            >
+              Open Chat
+            </Button>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
+          <TamaguiDemo />
+        </View>
+      </View>
+    </ScrollView>
+  );
+
+  const renderChatContent = () => (
+    <View style={styles.chatContainer}>
+      <View style={styles.chatHeader}>
+        <Button onPress={() => setActiveView("main")} style={styles.backButton}>
+          Back to Main
+        </Button>
+        <Text style={styles.chatTitle}>Chat</Text>
+      </View>
+      <ChatDemo />
+    </View>
+  );
+
   return (
     <ErrorBoundary>
-      <TamaguiProvider config={config} defaultTheme={colorScheme || "light"}>
-        <CustomClerkProvider>
-          <PostHogProvider>
-            <TRPCProvider>
-              <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
-                <StatusBar style="auto" />
-                {!appReady ? (
-                  <View style={styles.container}>
-                    <Text style={styles.loadingText}>Loading app...</Text>
-                  </View>
-                ) : (
-                  <ScrollView contentContainerStyle={styles.scrollView}>
+      <TamaguiProvider config={config} defaultTheme="light">
+        <ReduxProvider>
+          <CustomClerkProvider>
+            <PostHogProvider>
+              <TRPCProvider>
+                <SafeAreaWrapper style={styles.safeArea} key="main-safe-area">
+                  <StatusBar style="auto" />
+                  {!appReady ? (
                     <View style={styles.container}>
-                      <Text style={styles.title}>Mobile App</Text>
-                      <Text style={styles.subtitle}>
-                        Welcome to the demo app
-                      </Text>
-
-                      <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Authentication:</Text>
-                        <ClerkAuth />
-                      </View>
-
-                      <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>tRPC Demo:</Text>
-                        <HelloExample />
-                      </View>
-
-                      <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Tamagui Demo:</Text>
-                        <TamaguiDemo />
-                      </View>
+                      <Text style={styles.loadingText}>Loading app...</Text>
                     </View>
-                  </ScrollView>
-                )}
-              </SafeAreaWrapper>
-            </TRPCProvider>
-          </PostHogProvider>
-        </CustomClerkProvider>
+                  ) : activeView === "main" ? (
+                    renderMainContent()
+                  ) : (
+                    renderChatContent()
+                  )}
+                </SafeAreaWrapper>
+              </TRPCProvider>
+            </PostHogProvider>
+          </CustomClerkProvider>
+        </ReduxProvider>
       </TamaguiProvider>
     </ErrorBoundary>
   );
 }
 
+const Button = ({ onPress, children, style }: any) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={[
+      {
+        backgroundColor: "#2196F3",
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        alignItems: "center",
+        marginTop: 10,
+      },
+      style,
+    ]}
+  >
+    <Text style={{ color: "white", fontWeight: "bold" }}>{children}</Text>
+  </TouchableOpacity>
+);
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
   },
   scrollView: {
     flexGrow: 1,
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     padding: 20,
     paddingTop: 60,
@@ -192,5 +245,35 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#666",
     marginBottom: 10,
+  },
+  chatContainer: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
+  chatHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  backButton: {
+    marginRight: 10,
+    backgroundColor: "#666",
+  },
+  chatTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  chatPreview: {
+    width: "100%",
+    padding: 15,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  chatButton: {
+    width: 200,
   },
 });

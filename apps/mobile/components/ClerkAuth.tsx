@@ -255,18 +255,22 @@ export function ClerkAuth() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#ffffff",
     borderRadius: 8,
     marginVertical: 8,
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#000000",
   },
   text: {
     marginBottom: 16,
     fontSize: 16,
+    color: "#000000",
   },
   input: {
     height: 40,
@@ -275,13 +279,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 12,
     paddingHorizontal: 8,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
+    color: "#000000",
   },
   buttonContainer: {
     marginBottom: 12,
   },
   linkText: {
-    color: "blue",
+    color: "#0066cc",
     textAlign: "center",
     marginBottom: 16,
   },
@@ -297,7 +302,7 @@ const styles = StyleSheet.create({
   },
   dividerText: {
     marginHorizontal: 8,
-    color: "#666",
+    color: "#333333",
   },
   oauthContainer: {
     gap: 12,

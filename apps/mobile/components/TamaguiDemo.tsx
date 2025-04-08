@@ -15,6 +15,7 @@ export function TamaguiDemo() {
       scale={0.9}
       hoverStyle={{ scale: 0.925 }}
       pressStyle={{ scale: 0.875 }}
+      theme="active"
     >
       <Card.Header padded>
         <H2>Tamagui Demo</H2>

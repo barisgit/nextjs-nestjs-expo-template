@@ -14,7 +14,9 @@ export function HelloExample(): JSX.Element {
   // Use tRPC query with TanStack Query
   const helloQuery = useQuery(trpc.hello.queryOptions({ name }));
 
-  const incrementQuery = useQuery(trpc.increment.queryOptions(incrementCount));
+  const incrementQuery = useQuery(
+    trpc.increment.queryOptions({ value: incrementCount })
+  );
 
   // Get current user information
   const userQuery = useQuery(trpc.me.queryOptions());

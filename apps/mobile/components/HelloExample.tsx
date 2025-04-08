@@ -16,7 +16,9 @@ export function HelloExample() {
 
   // Use tRPC queries
   const helloQuery = useQuery(trpc.hello.queryOptions({ name }));
-  const incrementQuery = useQuery(trpc.increment.queryOptions(incrementCount));
+  const incrementQuery = useQuery(
+    trpc.increment.queryOptions({ value: incrementCount })
+  );
   const userQuery = useQuery(trpc.me.queryOptions());
 
   return (

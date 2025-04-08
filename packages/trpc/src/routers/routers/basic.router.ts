@@ -27,9 +27,15 @@ export class BasicRouter {
         };
       }),
 
-    increment: protectedProcedure.input(z.number()).query(({ input }) => {
-      return input + 1;
-    }),
+    increment: protectedProcedure
+      .input(
+        z.object({
+          value: z.number().describe("Number to increment"),
+        })
+      )
+      .query(({ input }) => {
+        return input.value + 1;
+      }),
 
     // Me endpoint - protected (requires auth)
     me: protectedProcedure.query(({ ctx }) => {

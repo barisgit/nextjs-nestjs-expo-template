@@ -17,6 +17,10 @@ export class BasicRouter {
           .optional()
       )
       .query(({ input }) => {
+        this.logger.debug(
+          `hello endpoint called with input: ${JSON.stringify(input)}`
+        );
+
         const name = input?.name || "World";
         return {
           greeting: `Hello ${name}`,

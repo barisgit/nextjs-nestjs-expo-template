@@ -34,7 +34,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
-    "test:ci": "jest --ci --coverage --json --outputFile=jest-results.json"
+    "test:ci": "jest --ci --coverage --json --outputFile=jest-results.json",
+    "fullclean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
     "@clerk/express": "^1.4.1",

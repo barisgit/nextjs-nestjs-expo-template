@@ -25,7 +25,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "lint": "eslint . --max-warnings 0",
-    "fullclean": "rm -rf .next && rm -rf node_modules && rm -rf .turbo"
+    "fullclean": "rm -rf .next && rm -rf node_modules && rm -rf .turbo && rm -rf dist"
   },
   "dependencies": {
     "@clerk/express": "^1.4.0",

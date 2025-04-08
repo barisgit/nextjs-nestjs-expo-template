@@ -50,7 +50,7 @@ export interface SocketResponse {
 export function createValidatedHandler<
   Event extends keyof ClientToServerEvents,
   Schema extends z.ZodType,
-  Callback extends (...args: any[]) => void,
+  Callback extends (...args: unknown[]) => void,
 >(
   event: Event,
   schema: Schema,
@@ -61,7 +61,9 @@ export function createValidatedHandler<
   ) => void | Promise<void>
 ) {
   return (socket: TypedServerSocket) => {
-    socket.on(event, ((data: any, callback?: Callback) => {
+    // @ts-expect-error - Socket.io's typing system is complex
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    socket.on(event, (data: any, callback?: Callback) => {
       try {
         schema
           .parseAsync(data)
@@ -79,7 +81,7 @@ export function createValidatedHandler<
                     success: false,
                     error:
                       error instanceof Error ? error.message : "Unknown error",
-                  } as any);
+                  } as SocketResponse);
                 }
               });
             }
@@ -90,7 +92,7 @@ export function createValidatedHandler<
               error
             );
             if (typeof callback === "function") {
-              callback(error as any);
+              callback(error as SocketResponse);
             } else {
               socket.emit("error", {
                 code: "VALIDATION_ERROR",
@@ -101,7 +103,7 @@ export function createValidatedHandler<
       } catch (error) {
         console.error(`Validation error for event ${String(event)}:`, error);
         if (typeof callback === "function") {
-          callback(error as any);
+          callback(error as SocketResponse);
         } else {
           socket.emit("error", {
             code: "VALIDATION_ERROR",
@@ -109,7 +111,7 @@ export function createValidatedHandler<
           });
         }
       }
-    }) as any);
+    });
   };
 }
 

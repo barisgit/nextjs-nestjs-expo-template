@@ -14,7 +14,23 @@ export const envSchema = z.object({
       (val) => !val.includes("clerk-publishable-key"),
       "Clerk publishable key cannot be a placeholder value"
     ),
-  EXPO_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
+  EXPO_PUBLIC_POSTHOG_KEY: z
+    .string()
+    .min(1)
+    .refine(
+      (val) => {
+        if (val.includes("posthog-key")) {
+          console.warn(
+            "PostHog key is a placeholder value. Please replace it with your actual PostHog key."
+          );
+        }
+        return true;
+      },
+      {
+        message:
+          "PostHog key is a placeholder value. Please replace it with your actual PostHog key.",
+      }
+    ),
   EXPO_PUBLIC_POSTHOG_HOST: z.string().url().default("https://app.posthog.com"),
 });
 

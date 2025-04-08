@@ -1,24 +1,12 @@
 import React, { ReactNode, useEffect } from "react";
 import { PostHogProvider as PostHogRNProvider } from "posthog-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
 import { useAuth } from "@clerk/clerk-expo";
 
 // Get the PostHog API key from environment variables
 const POSTHOG_API_KEY = process.env.EXPO_PUBLIC_POSTHOG_KEY || "";
 const POSTHOG_HOST =
   process.env.EXPO_PUBLIC_POSTHOG_HOST || "https://app.posthog.com";
-
-// Custom interfaces for extending PostHog types
-interface ExtendedPostHogOptions {
-  host: string;
-  disableGeoip?: boolean;
-  captureApplicationLifecycleEvents?: boolean;
-  captureScreenViews?: boolean;
-  useDeviceId?: boolean;
-  enableDebug?: boolean;
-}
-
 // Define the shape of the global posthog object
 declare global {
   // eslint-disable-next-line no-var
@@ -32,6 +20,12 @@ declare global {
 
 interface PostHogProviderProps {
   children: ReactNode;
+}
+
+interface PostHogCustomStorage {
+  getItem: (key: string) => Promise<string | null>;
+  setItem: (key: string, value: string) => Promise<void>;
+  removeItem: (key: string) => Promise<void>;
 }
 
 export function PostHogProvider({
@@ -50,40 +44,39 @@ export function PostHogProvider({
     }
   }, [isSignedIn, userId]);
 
-  // Create the client configuration
-  const clientConfig = {
-    // Use AsyncStorage for persistence
-    storage: {
-      async getItem(key: string): Promise<string | null> {
-        return AsyncStorage.getItem(key);
-      },
-      async setItem(key: string, value: string): Promise<void> {
-        return AsyncStorage.setItem(key, value);
-      },
-      async removeItem(key: string): Promise<void> {
-        return AsyncStorage.removeItem(key);
-      },
-    },
-    // Add platform information
-    platform: Platform.OS,
+  const storage: PostHogCustomStorage = {
+    getItem: async (key: string) => AsyncStorage.getItem(key),
+    setItem: async (key: string, value: string) =>
+      AsyncStorage.setItem(key, value),
+    removeItem: async (key: string) => AsyncStorage.removeItem(key),
   };
 
   return (
     <PostHogRNProvider
       apiKey={POSTHOG_API_KEY}
-      options={
-        {
-          host: POSTHOG_HOST,
-          disableGeoip: true,
-          // Extended options with proper typing
-          captureApplicationLifecycleEvents: true,
-          captureScreenViews: true,
-          useDeviceId: true,
-          enableDebug: __DEV__,
-        } as ExtendedPostHogOptions
-      }
-      // Using type assertion for the entire props object
-      {...({ client: clientConfig } as any)}
+      options={{
+        host: POSTHOG_HOST,
+        sendFeatureFlagEvent: true,
+        preloadFeatureFlags: true,
+        captureMode: "form",
+        persistence: "file",
+        flushAt: 20,
+        flushInterval: 30000,
+        disabled: false,
+        defaultOptIn: true,
+        disableGeoip: true,
+        captureNativeAppLifecycleEvents: true,
+        customStorage: storage,
+        bootstrap: {
+          distinctId: userId || undefined,
+          isIdentifiedId: isSignedIn || false,
+        },
+      }}
+      autocapture={{
+        captureTouches: true,
+        captureLifecycleEvents: true,
+        captureScreens: true,
+      }}
     >
       {children}
     </PostHogRNProvider>

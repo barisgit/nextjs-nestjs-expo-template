@@ -1,15 +1,16 @@
 # UI Package
 
-This package provides shared UI components that can be used across web and mobile applications in the monorepo.
+This package provides shared UI components that can be used across web applications in the monorepo.
 
 ## Features
 
-- Cross-platform components for web and native
-- Integration with TailwindCSS and ShadCN UI
+- Web components based on TailwindCSS and ShadCN UI
 - Theming and styling utilities
 - Accessibility-focused components
 - Stateful and stateless components
 - Form components with validation
+
+> **Note**: For mobile (React Native) components, we use Tamagui in the mobile app directly rather than through this package.
 
 ## Installation
 
@@ -25,7 +26,7 @@ The package is included in the monorepo. It can be imported into any other packa
 
 ## Usage
 
-### Web (Next.js) Components
+### Web (Next.js) Components with ShadCN UI
 
 Import and use components in your Next.js application:
 
@@ -54,9 +55,30 @@ export default function LoginPage() {
 }
 ```
 
-### Mobile (React Native) Components
+### Mobile Components
 
-> Coming soon
+For mobile components, we use Tamagui directly in the mobile app. This decision allows us to optimize for performance and provide a native feel.
+
+Example usage in the mobile app:
+
+```tsx
+import { Button, Card, H2, Input } from 'tamagui';
+
+export function LoginScreen() {
+  return (
+    <Card size="$4" bordered elevate>
+      <Card.Header padded>
+        <H2>Login</H2>
+      </Card.Header>
+      <Card.Footer padded>
+        <Input placeholder="Email" autoCapitalize="none" />
+        <Input placeholder="Password" secureTextEntry />
+        <Button theme="blue" marginTop="$4">Log In</Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+```
 
 ## Available Components
 
@@ -104,11 +126,20 @@ export default function LoginPage() {
 
 ## Theme Customization
 
-Done through tailwindcss.
+Theming is done through TailwindCSS for web components.
 
-## Hooks
+## Web/Mobile Component Strategy
 
-> Coming soon
+Our component strategy separates web and mobile components:
+
+- **Web**: ShadCN UI components with TailwindCSS in this package
+- **Mobile**: Tamagui components directly in the mobile app
+
+This separation allows us to:
+1. Leverage platform-specific best practices
+2. Optimize for each platform's performance characteristics
+3. Use the most appropriate component libraries for each platform
+4. Maintain type safety across both platforms
 
 ## Building Custom Components
 
@@ -154,7 +185,7 @@ import { Button } from 'shadcn/ui';
 
 ## Accessibility
 
-The UI package is built with tailwindcss and shadcn/ui, and accessibility in mind.
+The UI package is built with TailwindCSS and ShadCN UI with accessibility in mind.
 
 ## Best Practices
 
@@ -163,3 +194,4 @@ The UI package is built with tailwindcss and shadcn/ui, and accessibility in min
 3. Leverage theme customization for brand consistency
 4. Test components across different screen sizes
 5. Follow accessibility guidelines when extending components
+6. For mobile-specific UIs, use Tamagui directly in the mobile app

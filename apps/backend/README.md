@@ -12,13 +12,13 @@ The backend relies on several shared packages located in the `/packages` directo
 
 **Location:** `/packages/db`
 
-The database package provides database connectivity, entity definitions, and migration tools.
+The database package provides TypeORM connectivity, entity definitions, and migration tools.
 
 - **Key Files:**
-  - `src/database.module.ts` - NestJS module for database integration
+  - `src/database.module.ts` - NestJS module for TypeORM integration
   - `src/data-source.ts` - TypeORM data source configuration
   - `src/entities/` - Database entity definitions
-  - `src/migrations/` - Database migration scripts
+  - `src/migrations/` - TypeORM migration scripts
 
 **Usage:** Import the `DatabaseModule` in your NestJS modules:
 
@@ -29,6 +29,36 @@ import { DatabaseModule } from "@repo/db";
   imports: [DatabaseModule],
 })
 export class YourModule {}
+```
+
+**TypeORM Entities:**
+
+The database package defines several TypeORM entities with relationships:
+
+```typescript
+// Example entity with relationships
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+
+@Entity("users")
+export class User {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+  
+  @Column({ length: 50, unique: true })
+  username: string;
+  
+  @Column({ length: 255, unique: true })
+  email: string;
+  
+  @Column({ default: () => "CURRENT_TIMESTAMP" })
+  createdAt: Date;
+  
+  @Column({ default: () => "CURRENT_TIMESTAMP" })
+  updatedAt: Date;
+  
+  @OneToMany(() => UserItem, userItem => userItem.user)
+  userItems: UserItem[];
+}
 ```
 
 ### tRPC (`@repo/trpc`)
@@ -84,7 +114,7 @@ export class YourModule {}
 
 **Location:** `/packages/websockets`
 
-Provides type-safe real-time communication between server and clients.
+Provides type-safe real-time communication between server and clients using Socket.IO.
 
 - **Key Files:**
   - `src/server.ts` - Server-side Socket.IO setup
@@ -101,6 +131,41 @@ import { WebsocketsModule } from "@repo/websockets/server";
   imports: [WebsocketsModule],
 })
 export class YourModule {}
+```
+
+**Type-Safe WebSockets:**
+
+Our WebSockets implementation uses TypeScript for complete type safety:
+
+```typescript
+// In a gateway file
+import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import { Socket } from 'socket.io';
+import { TypedServer } from '@repo/websockets';
+import { ServerEvents, ClientEvents } from '@repo/websockets';
+
+@WebSocketGateway({ cors: true })
+export class ChatGateway {
+  @SubscribeMessage(ClientEvents.JOIN_ROOM)
+  async handleJoinRoom(client: Socket, roomId: string) {
+    await client.join(roomId);
+    client.emit(ServerEvents.ROOM_JOINED, { roomId });
+    client.to(roomId).emit(ServerEvents.USER_JOINED, { 
+      userId: client.id, 
+      roomId 
+    });
+  }
+  
+  @SubscribeMessage(ClientEvents.SEND_MESSAGE)
+  handleMessage(client: Socket, payload: { roomId: string; content: string }) {
+    client.to(payload.roomId).emit(ServerEvents.MESSAGE, {
+      senderId: client.id,
+      content: payload.content,
+      roomId: payload.roomId,
+      timestamp: new Date()
+    });
+  }
+}
 ```
 
 ### Analytics (`@repo/analytics`)
@@ -146,12 +211,19 @@ The backend uses the NestJS ConfigModule with environment variables. See `.env.e
    pnpm test
    ```
 
+4. Run TypeORM migrations:
+   ```bash
+   pnpm --filter @repo/db migration:run
+   ```
+
 ## Architecture Decisions
 
 - **Modular Design**: Functionality is split into packages to maximize code reuse and maintainability
 - **Type Safety**: All packages use TypeScript with strict typing
 - **NestJS Integration**: Packages are designed to work seamlessly with NestJS modules
 - **Cross-Platform**: Where appropriate, packages support both backend and frontend usage
+- **TypeORM for Data Access**: We chose TypeORM for its excellent TypeScript integration and powerful ORM features
+- **Type-safe WebSockets**: Socket.IO with TypeScript types for real-time communication
 
 ## Detailed Package Documentation
 

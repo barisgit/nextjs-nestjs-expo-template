@@ -8,7 +8,7 @@ This React Native application built with Expo provides a mobile interface for th
 - Integration with shared packages
 - Type-safe API communication with tRPC
 - Real-time functionality with WebSockets
-- UI components from the shared UI library
+- UI components with Tamagui
 - Analytics tracking
 
 ## Development
@@ -52,7 +52,7 @@ Real-time communication using the WebSockets package:
 
 ```tsx
 // app/utils/socket.ts
-import { createTypedSocketClient, ClientEvents } from '@repo/websockets';
+import { createTypedSocketClient, ClientEvents, ServerEvents } from '@repo/websockets';
 
 export const socket = createTypedSocketClient('http://your-api-url');
 
@@ -91,9 +91,51 @@ export function ChatScreen({ roomId }) {
 }
 ```
 
-### UI Component Usage
+### Tamagui UI Component Usage
 
-> Coming soon
+Tamagui is integrated for a consistent and performant UI experience:
+
+```tsx
+import React, { useState } from 'react';
+import { Button, Card, H2, Paragraph, View, Input } from 'tamagui';
+
+export function ProfileCard({ user }) {
+  const [bio, setBio] = useState(user?.bio || '');
+  
+  return (
+    <Card
+      bordered
+      elevate
+      size="$4"
+      animation="bouncy"
+      width="100%"
+      scale={0.9}
+      hoverStyle={{ scale: 0.925 }}
+      pressStyle={{ scale: 0.875 }}
+      theme="active"
+    >
+      <Card.Header padded>
+        <H2>{user?.name || 'User Profile'}</H2>
+        <Paragraph>{user?.email}</Paragraph>
+      </Card.Header>
+      
+      <Card.Footer padded>
+        <View style={{ gap: 12 }}>
+          <Input
+            placeholder="Enter your bio"
+            value={bio}
+            onChangeText={setBio}
+            width="100%"
+          />
+          <Button theme="blue" onPress={() => console.log('Bio updated:', bio)}>
+            Update Profile
+          </Button>
+        </View>
+      </Card.Footer>
+    </Card>
+  );
+}
+```
 
 ### Analytics Integration
 
@@ -123,7 +165,7 @@ function FeatureScreen() {
 }
 ```
 
-## (Envisioned) Project Structure
+## Project Structure
 
 ```text
 mobile/
@@ -137,7 +179,8 @@ mobile/
 ├── assets/              # Static assets
 ├── .env.example         # Example environment variables
 ├── app.config.js        # Expo configuration (entry point)
-└── app.config.ts        # Expo configuration (the actual config)
+├── app.config.ts        # Expo configuration (the actual config)
+└── tamagui.config.ts    # Tamagui configuration
 ```
 
 ## Environment Setup
@@ -150,6 +193,23 @@ API_URL=http://localhost:3000
 CLERK_PUBLISHABLE_KEY=your_clerk_key
 ```
 
+## Tamagui Theming
+
+The app uses Tamagui for a consistent UI experience. The theme is configured in `tamagui.config.ts`:
+
+```tsx
+// Customize theme colors, fonts, and other properties
+const tamaguiConfig = createTamagui({
+  ...defaultConfig,
+  fonts: {
+    ...defaultConfig.fonts,
+    heading: interFont,
+    body: interFont,
+  },
+  // Add custom themes and tokens here
+});
+```
+
 ## Known Issues
 
 - Expo SDK 52 is not compatible with React 18. We will use React 19 when we upgrade to Expo SDK 53 (in May 2025).
@@ -159,5 +219,5 @@ CLERK_PUBLISHABLE_KEY=your_clerk_key
 1. Create screen components in `app/screens/`
 2. Add navigation in `app/navigation/`
 3. Connect to backend APIs using tRPC procedures
-4. Use shared UI components from `@repo/ui/native` (coming soon)
+4. Use Tamagui components for consistent UI
 5. Add analytics tracking for important user actions

@@ -26,12 +26,12 @@ A modern full-stack, type-safe monorepo template with real-time capabilities and
 ## ✨ Features
 
 - **📦 Monorepo Setup**: Turborepo with pnpm for efficient workspace management
-- **🔄 Full Type Safety**: End-to-end type safety from backend to frontend with tRPC
+- **🔄 Full Type Safety**: End-to-end type safety from backend to frontend with tRPC and typed WebSockets
 - **🚀 Modern Stack**: Next.js, NestJS, and Expo with TypeScript
-- **🔌 Real-time Communication**: WebSockets integration with Socket.IO
+- **🔌 Real-time Communication**: Type-safe WebSockets integration with Socket.IO
 - **👤 Authentication**: Clerk integration for secure user management
 - **📊 Analytics**: PostHog integration for tracking user behavior
-- **🎨 UI Components**: Shared components using TailwindCSS and ShadCN UI
+- **🎨 UI Components**: TailwindCSS with ShadCN UI for web and Tamagui for mobile
 - **🧩 Modular Architecture**: Well-organized packages for code sharing
 
 ## 🚀 Quick Start
@@ -74,7 +74,7 @@ nextjs-nestjs-expo-template/
 │   ├── db/          # Database models and TypeORM configuration
 │   ├── services/    # Shared services (auth, redis, webhooks)
 │   ├── trpc/        # tRPC API router definitions and context
-│   ├── ui/          # Shared UI components
+│   ├── ui/          # Shared UI components (ShadCN UI for web)
 │   ├── websockets/  # Type-safe WebSocket implementation
 │   ├── eslint-config/ # Shared ESLint configuration
 │   └── typescript-config/ # Shared TypeScript configuration
@@ -95,9 +95,9 @@ nextjs-nestjs-expo-template/
 
 ### Backend
 - **NestJS**: A progressive Node.js framework for scalable server-side applications
-- **TypeORM**: ORM for TypeScript and JavaScript
-- **PostgreSQL**: Advanced open-source database
-- **Socket.IO**: Real-time bidirectional event-based communication
+- **TypeORM**: ORM for TypeScript and JavaScript with PostgreSQL
+- **Socket.IO**: Real-time bidirectional event-based communication with type safety
+- **PostgreSQL**: Open-source relational database
 
 ### Frontend
 - **Next.js**: React framework for production-grade applications
@@ -108,6 +108,7 @@ nextjs-nestjs-expo-template/
 ### Mobile
 - **Expo**: Platform for making universal React applications
 - **React Native**: Framework for building native apps using React
+- **Tamagui**: UI library for React Native with performance and developer experience in mind
 
 ### Common
 - **TypeScript**: Typed superset of JavaScript
@@ -147,13 +148,16 @@ function UserProfile() {
 }
 ```
 
-### Real-time Communication
+### Type-safe Real-time Communication
 
 ```tsx
-// WebSocket setup
+// WebSocket setup with type safety
+import { createTypedSocketClient, ClientEvents, ServerEvents } from '@repo/websockets';
+
+const socket = createTypedSocketClient('http://your-api-url');
 socket.emit(ClientEvents.JOIN_ROOM, roomId);
 
-// Listen for messages
+// Listen for messages with full type safety
 socket.on(ServerEvents.MESSAGE, (message) => {
   console.log('New message:', message);
 });
@@ -187,5 +191,6 @@ Blaž Aristovnik - [@barisgit](https://github.com/barisgit) - [aristovnik.me](ht
 - [TypeORM](https://typeorm.io/)
 - [Socket.IO](https://socket.io/)
 - [ShadCN UI](https://ui.shadcn.com/)
+- [Tamagui](https://tamagui.dev/)
 - [Clerk](https://clerk.dev/)
 - [PostHog](https://posthog.com/)

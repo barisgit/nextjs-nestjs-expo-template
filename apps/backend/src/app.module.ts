@@ -7,6 +7,7 @@ import { AppConfigModule } from "./config/app-config.module.js";
 import { TRPCModule, TRPCPanelController } from "@repo/trpc";
 import { PostHogModule } from "@repo/analytics";
 import { WebsocketsModule } from "@repo/websockets/server";
+import { HealthModule } from "./health/health.module.js";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { WebsocketsModule } from "@repo/websockets/server";
     AuthModule,
     WebsocketsModule,
     WebhooksModule,
+    HealthModule,
   ],
   controllers: [TRPCPanelController],
   providers: [],

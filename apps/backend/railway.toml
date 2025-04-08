@@ -1,0 +1,16 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pnpm run build"
+
+[deploy]
+startCommand = "pnpm run start:prod"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+
+[env]
+PORT = "3001"
+
+[[services]]
+name = "backend"
+internal_port = 3001 

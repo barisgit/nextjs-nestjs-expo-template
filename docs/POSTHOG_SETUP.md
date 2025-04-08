@@ -66,7 +66,7 @@ pnpm dev:web
 ```bash
 # PostHog Analytics  
 EXPO_PUBLIC_POSTHOG_KEY=your_posthog_key_here
-EXPO_PUBLIC_POSTHOG_HOST=https://app.posthog.com  # or https://eu.posthog.com for EU region
+EXPO_PUBLIC_POSTHOG_HOST=https://eu.i.posthog.com  # or https://app.posthog.com for US region
 ```
 
 2. The mobile app is already configured to:
@@ -320,4 +320,4 @@ this.logger.log('PostHog event captured:', event);
 - [PostHog React/Next.js SDK](https://posthog.com/docs/libraries/react)
 - [PostHog React Native SDK](https://posthog.com/docs/libraries/react-native)
 - [PostHog Node.js SDK](https://posthog.com/docs/libraries/node)
-- [Feature Flags Documentation](https://posthog.com/docs/feature-flags/setup) 
+- [Feature Flags Documentation](https://posthog.com/docs/feature-flags/setup)

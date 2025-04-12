@@ -8,6 +8,15 @@
 <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
 <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS" /></a>
 <a href="https://socket.io"><img src="https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101" alt="Socket.io" /></a>
+<a href="https://typeorm.io"><img src="https://img.shields.io/badge/TypeORM-E83524?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xNiA4SDhjLS4yNjYgMC0uNTIuMTA1LS43MDcuMjkzQTEgMSAwIDAgMCA3IDl2MTRhMSAxIDAgMCAwIDEgMWg4YTEgMSAwIDAgMCAxLTFWOWExIDEgMCAwIDAtMS0xem0tMSAydjEySDl2LTEyem05LTJoLThhMSAxIDAgMCAwLTEgMXYxNGExIDEgMCAwIDAgMSAxaDhhMSAxIDAgMCAwIDEtMVY5YTEgMSAwIDAgMC0xLTF6bS0xIDJ2MTJoLTZ2LTEyeiIvPjwvc3ZnPg==" alt="TypeORM" /></a>
+<a href="https://trpc.io"><img src="https://img.shields.io/badge/tRPC-%232596BE.svg?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" /></a>
+<a href="https://tamagui.dev"><img src="https://img.shields.io/badge/Tamagui-2C4159?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjUxMiIgZmlsbD0iIzE4QTBGQiIvPgo8cGF0aCBkPSJNMjY1Ljg1MSAyNDMuOTFWNDk3LjAwN0MyNjUuODUxIDU0MC42MjMgMzAxLjIzNSA1NzYuMDA3IDM0NC44NTEgNTc2LjAwN0g1OTUuNDc3QzYzOS4wOTMgNTc2LjAwNyA2NzQuNDc3IDU0MC42MjMgNjc0LjQ3NyA0OTcuMDA3VjI0My45MUw0NjguNjgxIDc5LjYzMzNDNDUxLjk5NSA2OC42ODE5IDQyOS45NDMgNjguNjM1OCA0MTMuMjE5IDc5LjUxNzJMMjY1Ljg1MSAyNDMuOTFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNzYxLjQ1NSA3NzguNzc1VjUyNS42NzlDNzYxLjQ1NSA0ODIuMDYzIDcyNi4wNzEgNDQ2LjY3OSA2ODIuNDU1IDQ0Ni42NzlINDMxLjgyOUMzODguMjEzIDQ0Ni42NzkgMzUyLjgyOSA0ODIuMDYzIDM1Mi44MjkgNTI1LjY3OVY3NzguNzc1TDU1OC42MjUgOTQzLjA1MkM1NzUuMzExIDk1NC4wMDMgNTk3LjM2MyA5NTQuMDUgNjE0LjA4NyA5NDMuMTY4TDc2MS40NTUgNzc4Ljc3NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Tamagui" /></a>
+
+<a href="https://clerk.com"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white" alt="Clerk" /></a>
+<a href="https://tanstack.com/query"><img src="https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white" alt="TanStack Query" /></a>
+<a href="https://posthog.com"><img src="https://img.shields.io/badge/PostHog-000000?style=for-the-badge&logo=posthog&logoColor=white" alt="PostHog" /></a>
+<a href="https://www.postgresql.org"><img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" /></a>
+<a href="https://turbo.build"><img src="https://img.shields.io/badge/Turborepo-000000?style=for-the-badge&logo=turborepo&logoColor=white" alt="Turborepo" /></a>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Stargazers](https://img.shields.io/github/stars/barisgit/nextjs-nestjs-expo-template.svg?style=flat-square)](https://github.com/barisgit/nextjs-nestjs-expo-template/stargazers)
@@ -46,19 +55,29 @@ A modern full-stack, type-safe monorepo template with real-time capabilities and
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/nextjs-nestjs-expo-template.git
+git clone https://github.com/barisgit/nextjs-nestjs-expo-template.git
 cd nextjs-nestjs-expo-template
 
 # Install dependencies
-pnpm install
+pnpm i # or pnpm install
 
 # Set up environment variables
 cp apps/backend/.env.example apps/backend/.env
 cp apps/web/.env.example apps/web/.env
 cp apps/mobile/.env.example apps/mobile/.env
 
+# Set up databases (be sure docker is running)
+pnpm db:setup
+pnpm redis:setup
+# or configure this manually and add to .env files
+
 # Start development servers
 pnpm dev
+
+# or
+pnpm dev:backend # NestJS
+pnpm dev:web # Next.js
+pnpm dev:mobile # Expo
 ```
 
 ## 🔍 Project Structure
@@ -92,29 +111,43 @@ nextjs-nestjs-expo-template/
   <a href="https://socket.io/"><img src="https://cdn.worldvectorlogo.com/logos/socket-io.svg" alt="Socket.io" width="50" /></a>&nbsp;&nbsp;
   <a href="https://www.postgresql.org/"><img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" alt="PostgreSQL" width="50" /></a>
 </p>
+<p align="center">
+  <a href="https://typeorm.io/"><img src="https://raw.githubusercontent.com/typeorm/typeorm/master/resources/logo_big.png" alt="TypeORM" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://tamagui.dev/"><img src="https://avatars.githubusercontent.com/u/94025540?s=48&v=4" alt="Tamagui" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://ui.shadcn.com/"><img src="https://avatars.githubusercontent.com/u/139895814?s=200&v=4" alt="shadcn/ui" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://clerk.com/"><img src="https://clerk.com/images/clerk-logo.svg" alt="Clerk" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://tanstack.com/query"><img src="https://tanstack.com/_build/assets/logo-color-100w-br5_Ikqp.png" alt="TanStack Query" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://posthog.com/"><img src="https://posthog.com/brand/posthog-logo.svg" alt="PostHog" height="50" /></a>&nbsp;&nbsp;
+  <a href="https://turbo.build/"><img src="https://turbo.build/images/docs/repo/repo-hero-logo-dark.svg" alt="Turborepo" height="50" /></a>
+</p>
 
 ### Backend
+
 - **NestJS**: A progressive Node.js framework for scalable server-side applications
 - **TypeORM**: ORM for TypeScript and JavaScript with PostgreSQL
 - **Socket.IO**: Real-time bidirectional event-based communication with type safety
 - **PostgreSQL**: Open-source relational database
 
 ### Frontend
+
 - **Next.js**: React framework for production-grade applications
 - **TailwindCSS**: Utility-first CSS framework
 - **ShadCN UI**: Beautifully designed components built with Radix UI and Tailwind CSS
 - **TanStack Query**: Data fetching and caching library
 
 ### Mobile
+
 - **Expo**: Platform for making universal React applications
 - **React Native**: Framework for building native apps using React
 - **Tamagui**: UI library for React Native with performance and developer experience in mind
 
 ### Common
+
 - **TypeScript**: Typed superset of JavaScript
 - **tRPC**: End-to-end typesafe APIs
 - **Turborepo**: High-performance build system for JavaScript/TypeScript monorepos
 - **Clerk**: Authentication and user management
+- **PostHog**: Open-source product analytics platform
 
 ## 📖 Documentation
 

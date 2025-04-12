@@ -11,7 +11,6 @@
 <a href="https://typeorm.io"><img src="https://img.shields.io/badge/TypeORM-E83524?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xNiA4SDhjLS4yNjYgMC0uNTIuMTA1LS43MDcuMjkzQTEgMSAwIDAgMCA3IDl2MTRhMSAxIDAgMCAwIDEgMWg4YTEgMSAwIDAgMCAxLTFWOWExIDEgMCAwIDAtMS0xem0tMSAydjEySDl2LTEyem05LTJoLThhMSAxIDAgMCAwLTEgMXYxNGExIDEgMCAwIDAgMSAxaDhhMSAxIDAgMCAwIDEtMVY5YTEgMSAwIDAgMC0xLTF6bS0xIDJ2MTJoLTZ2LTEyeiIvPjwvc3ZnPg==" alt="TypeORM" /></a>
 <a href="https://trpc.io"><img src="https://img.shields.io/badge/tRPC-%232596BE.svg?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" /></a>
 <a href="https://tamagui.dev"><img src="https://img.shields.io/badge/Tamagui-2C4159?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjUxMiIgZmlsbD0iIzE4QTBGQiIvPgo8cGF0aCBkPSJNMjY1Ljg1MSAyNDMuOTFWNDk3LjAwN0MyNjUuODUxIDU0MC42MjMgMzAxLjIzNSA1NzYuMDA3IDM0NC44NTEgNTc2LjAwN0g1OTUuNDc3QzYzOS4wOTMgNTc2LjAwNyA2NzQuNDc3IDU0MC42MjMgNjc0LjQ3NyA0OTcuMDA3VjI0My45MUw0NjguNjgxIDc5LjYzMzNDNDUxLjk5NSA2OC42ODE5IDQyOS45NDMgNjguNjM1OCA0MTMuMjE5IDc5LjUxNzJMMjY1Ljg1MSAyNDMuOTFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNzYxLjQ1NSA3NzguNzc1VjUyNS42NzlDNzYxLjQ1NSA0ODIuMDYzIDcyNi4wNzEgNDQ2LjY3OSA2ODIuNDU1IDQ0Ni42NzlINDMxLjgyOUMzODguMjEzIDQ0Ni42NzkgMzUyLjgyOSA0ODIuMDYzIDM1Mi44MjkgNTI1LjY3OVY3NzguNzc1TDU1OC42MjUgOTQzLjA1MkM1NzUuMzExIDk1NC4wMDMgNTk3LjM2MyA5NTQuMDUgNjE0LjA4NyA5NDMuMTY4TDc2MS40NTUgNzc4Ljc3NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Tamagui" /></a>
-
 <a href="https://clerk.com"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white" alt="Clerk" /></a>
 <a href="https://tanstack.com/query"><img src="https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white" alt="TanStack Query" /></a>
 <a href="https://posthog.com"><img src="https://img.shields.io/badge/PostHog-000000?style=for-the-badge&logo=posthog&logoColor=white" alt="PostHog" /></a>
@@ -109,9 +108,6 @@ nextjs-nestjs-expo-template/
   <a href="https://www.typescriptlang.org/"><img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript" width="50" /></a>&nbsp;&nbsp;
   <a href="https://tailwindcss.com/"><img src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg" alt="TailwindCSS" width="50" /></a>&nbsp;&nbsp;
   <a href="https://socket.io/"><img src="https://cdn.worldvectorlogo.com/logos/socket-io.svg" alt="Socket.io" width="50" /></a>&nbsp;&nbsp;
-  <a href="https://www.postgresql.org/"><img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" alt="PostgreSQL" width="50" /></a>
-</p>
-<p align="center">
   <a href="https://typeorm.io/"><img src="https://raw.githubusercontent.com/typeorm/typeorm/master/resources/logo_big.png" alt="TypeORM" height="50" /></a>&nbsp;&nbsp;
   <a href="https://tamagui.dev/"><img src="https://avatars.githubusercontent.com/u/94025540?s=48&v=4" alt="Tamagui" height="50" /></a>&nbsp;&nbsp;
   <a href="https://ui.shadcn.com/"><img src="https://avatars.githubusercontent.com/u/139895814?s=200&v=4" alt="shadcn/ui" height="50" /></a>&nbsp;&nbsp;

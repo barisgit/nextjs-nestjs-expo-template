@@ -1,0 +1,44 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": [
+        "PORT",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USERNAME",
+        "DB_PASSWORD",
+        "DB_DATABASE",
+        "CLERK_SECRET_KEY",
+        "CLERK_WEBHOOK_SECRET",
+        "CLERK_PUBLISHABLE_KEY",
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "REDIS_PASSWORD",
+        "POSTHOG_API_KEY",
+        "POSTHOG_HOST",
+        "USE_REDIS_CACHING"
+      ]
+    },
+    "dev": {
+      "env": [
+        "PORT",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USERNAME",
+        "DB_PASSWORD",
+        "DB_DATABASE",
+        "CLERK_SECRET_KEY",
+        "CLERK_WEBHOOK_SECRET",
+        "CLERK_PUBLISHABLE_KEY",
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "REDIS_PASSWORD",
+        "POSTHOG_API_KEY",
+        "POSTHOG_HOST",
+        "USE_REDIS_CACHING"
+      ]
+    }
+  }
+}

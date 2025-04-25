@@ -19,14 +19,15 @@
     "typeorm": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts",
     "migration:generate": "tsx ./scripts/generate-migration.ts",
     "migration:run": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts migration:run",
-    "migration:revert": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts migration:revert"
+    "migration:revert": "node --loader ts-node/esm --require tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/data-source.ts migration:revert",
+    "seed": "tsx ./src/seed-runner.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.13",
+    "@nestjs/common": "^11.1.0",
     "@nestjs/config": "^4.0.2",
     "@nestjs/typeorm": "^11.0.0",
-    "dotenv": "^16.4.7",
-    "pg": "^8.14.1",
+    "dotenv": "^16.5.0",
+    "pg": "^8.15.5",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "typeorm": "^0.3.22"
@@ -34,8 +35,8 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.14.0",
-    "eslint": "^8.57.1",
+    "@types/node": "^22.15.2",
+    "eslint": "^9.25.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsup": "^8.4.0",

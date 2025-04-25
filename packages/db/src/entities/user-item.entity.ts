@@ -19,17 +19,17 @@ export class UserItem {
   @JoinColumn({ name: "item_id" })
   item: Item;
 
-  @Column({ name: "item_id" })
+  @Column('uuid', { name: "item_id" })
   itemId: string;
 
   @ManyToOne("User", { eager: true, onDelete: "CASCADE" })
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @Column({ name: "user_id" })
+  @Column('uuid', { name: "user_id" })
   userId: string;
 
-  @Column({ name: "user_specific_value", nullable: true })
+  @Column('varchar', { name: "user_specific_value", nullable: true })
   userSpecificValue: string;
 
   @CreateDateColumn({ name: "created_at" })

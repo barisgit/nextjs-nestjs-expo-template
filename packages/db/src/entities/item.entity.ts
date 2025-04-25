@@ -27,7 +27,7 @@ export class Item {
   })
   status: ItemStatus;
 
-  @Column({ name: "example_numeric_field", default: 0 })
+  @Column('int', { name: "example_numeric_field", default: 0 })
   exampleNumericField: number;
 
   @Column({ name: "example_string_field", type: "varchar", nullable: true })

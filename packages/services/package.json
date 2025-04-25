@@ -28,22 +28,22 @@
     "fullclean": "rm -rf .next && rm -rf node_modules && rm -rf .turbo && rm -rf dist"
   },
   "dependencies": {
-    "@clerk/express": "^1.4.1",
-    "@nestjs/common": "^11.0.13",
+    "@clerk/express": "^1.4.9",
+    "@nestjs/common": "^11.1.0",
     "@nestjs/config": "^4.0.2",
-    "ioredis": "^5.6.0",
-    "posthog-node": "^4.11.2",
+    "ioredis": "^5.6.1",
+    "posthog-node": "^4.14.0",
     "@repo/analytics": "workspace:*",
-    "svix": "^1.63.1"
+    "svix": "^1.64.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "^8.29.1",
-    "@typescript-eslint/parser": "^8.29.1",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@typescript-eslint/parser": "^8.31.0",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.14.0",
-    "eslint": "^8.57.0",
+    "@types/node": "^22.15.2",
+    "eslint": "^9.25.1",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
   }

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": [
+        "EXPO_PUBLIC_TRPC_URL",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "EXPO_PUBLIC_POSTHOG_KEY",
+        "EXPO_PUBLIC_POSTHOG_HOST",
+        "EAS_PROJECT_ID"
+      ]
+    },
+    "dev": {
+      "env": [
+        "EXPO_PUBLIC_TRPC_URL",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "EXPO_PUBLIC_POSTHOG_KEY",
+        "EXPO_PUBLIC_POSTHOG_HOST",
+        "EAS_PROJECT_ID"
+      ]
+    }
+  }
+}

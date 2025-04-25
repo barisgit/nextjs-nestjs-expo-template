@@ -1,9 +1,8 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { User, Item, ItemDetail, UserItem } from "./entities/index.js";
 import { dataSourceOptions } from "./data-source.js";
-
+import { entities } from "./data-source.js";
 @Module({})
 export class DatabaseModule {
   static forRoot(): DynamicModule {
@@ -24,7 +23,7 @@ export class DatabaseModule {
   static forFeature(): DynamicModule {
     return {
       module: DatabaseModule,
-      imports: [TypeOrmModule.forFeature([User, Item, ItemDetail, UserItem])],
+      imports: [TypeOrmModule.forFeature(entities)],
       exports: [TypeOrmModule],
     };
   }

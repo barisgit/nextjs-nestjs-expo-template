@@ -1,29 +1,30 @@
 {
   "name": "@repo/eslint-config",
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "type": "module",
   "private": true,
+  "exports": {
+    "./base": "./base.js",
+    "./base.js": "./base.js",
+    "./next-js": "./next.js",
+    "./next-js.js": "./next.js",
+    "./react-internal": "./react-internal.js",
+    "./react-internal.js": "./react-internal.js"
+  },
   "scripts": {
     "fullclean": "rm -rf node_modules"
   },
-  "files": [
-    "node.js",
-    "next.js",
-    "react.js",
-    "react-native.js"
-  ],
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
-    "@next/eslint-plugin-next": "^15.2.4",
-    "@typescript-eslint/eslint-plugin": "^8.29.1",
-    "@typescript-eslint/parser": "^8.29.1",
-    "@vercel/style-guide": "^6.0.0",
-    "eslint": "^8.57.0",
-    "eslint-config-turbo": "^2.5.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "@eslint/js": "^9.25.1",
+    "@next/eslint-plugin-next": "^15.3.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-turbo": "^2.5.0",
-    "globals": "^16.0.0"
+    "eslint-plugin-turbo": "^2.5.1",
+    "globals": "^16.0.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0"
   }
 }

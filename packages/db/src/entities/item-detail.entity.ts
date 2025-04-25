@@ -33,7 +33,7 @@ export class ItemDetail {
   })
   level: DetailLevel;
 
-  @Column({ nullable: true })
+  @Column('varchar', { nullable: true })
   category: string;
 
   @CreateDateColumn({ name: "created_at" })

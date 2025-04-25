@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": [
+        "CLERK_SECRET_KEY",
+        "NEXT_PUBLIC_IS_PRODUCTION",
+        "NEXT_PUBLIC_API_URL",
+        "NEXT_PUBLIC_SOCKET_PATH",
+        "NEXT_PUBLIC_TRPC_URL",
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
+        "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
+        "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL",
+        "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL",
+        "NEXT_PUBLIC_POSTHOG_KEY",
+        "NEXT_PUBLIC_POSTHOG_HOST"
+      ]
+    },
+    "dev": {
+      "env": [
+        "CLERK_SECRET_KEY",
+        "NEXT_PUBLIC_IS_PRODUCTION",
+        "NEXT_PUBLIC_API_URL",
+        "NEXT_PUBLIC_SOCKET_PATH",
+        "NEXT_PUBLIC_TRPC_URL",
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
+        "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
+        "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL",
+        "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL",
+        "NEXT_PUBLIC_POSTHOG_KEY",
+        "NEXT_PUBLIC_POSTHOG_HOST"
+      ]
+    }
+  }
+}

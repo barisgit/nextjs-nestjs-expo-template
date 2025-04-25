@@ -11,13 +11,13 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true, length: 50 })
+  @Column('varchar', { unique: true, length: 50 })
   username: string;
 
-  @Column({ unique: true, length: 255 })
+  @Column('varchar', { unique: true, length: 255 })
   email: string;
 
-  @Column({ nullable: true, length: 255 })
+  @Column('varchar', { nullable: true, length: 255 })
   clerkUserId: string;
 
   // Add password hash later if needed

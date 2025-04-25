@@ -36,5 +36,6 @@
   "typescript.preferences.importModuleSpecifierEnding": "minimal",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "dbmlERDPreviewer.preferredTheme": "dark"
 }

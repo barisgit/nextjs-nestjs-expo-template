@@ -23,26 +23,26 @@
     "fullclean": "rm -rf .next && rm -rf node_modules && rm -rf .turbo && rm -rf dist"
   },
   "dependencies": {
-    "@clerk/express": "^1.4.1",
-    "@nestjs/common": "^11.0.13",
+    "@clerk/express": "^1.4.9",
+    "@nestjs/common": "^11.1.0",
     "@nestjs/config": "^4.0.2",
-    "@nestjs/platform-express": "^11.0.13",
+    "@nestjs/platform-express": "^11.1.0",
     "@repo/services": "workspace:*",
     "@repo/analytics": "workspace:*",
-    "@trpc/server": "^11.0.3",
+    "@trpc/server": "^11.1.1",
     "express": "^5.1.0",
-    "ioredis": "^5.6.0",
+    "ioredis": "^5.6.1",
     "superjson": "^2.2.2",
     "trpc-ui": "^1.0.15",
-    "zod": "^3.24.2"
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.15.2",
     "@types/uuid": "^10.0.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.25.1",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
     "uuid": "^11.1.0"

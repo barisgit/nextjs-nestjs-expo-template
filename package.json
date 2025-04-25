@@ -4,43 +4,51 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:web": "turbo dev --filter=@repo/web...",
-    "dev:mobile": "turbo dev --filter=@repo/mobile...",
-    "dev:backend": "turbo dev --filter=@repo/backend...",
-    "db:setup": "tsx scripts/setup-backend-env.ts",
+    "dev:setup": "tsx scripts/setup-dev.ts",
+    "dev:web": "turbo watch dev --filter=@repo/web",
+    "dev:mobile": "turbo watch dev --filter=@repo/mobile",
+    "dev:backend": "turbo watch dev --filter=@repo/backend",
+    "db:setup": "tsx scripts/setup-db.ts",
+    "db:seed": "tsx scripts/seed-db.ts",
     "redis:setup": "tsx scripts/setup-redis.ts",
     "lint": "turbo lint",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,cjs,mjs,md,json}\"",
     "fullclean": "turbo fullclean && rm -rf node_modules && rm pnpm-lock.yaml",
+    "fullcleanwindows": "turbo fullcleanwindows && rd /s /q node_modules && del pnpm-lock.yaml",
     "test": "turbo test",
     "test:cov": "turbo test:cov",
     "test:ci": "turbo test:ci",
     "test:e2e": "pnpm --filter @repo/web test:e2e",
     "test:e2e:ui": "pnpm --filter @repo/web test:e2e:ui",
     "test:e2e:debug": "pnpm --filter @repo/web test:e2e:debug",
-    "type-check": "turbo type-check"
+    "type-check": "turbo type-check",
+    "check-types": "turbo type-check",
+    "gen:package": "turbo gen package",
+    "inspect:envs": "tsx scripts/utilities/inspect-envs.ts"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@turbo/gen": "^2.5.0",
+    "@turbo/gen": "^2.5.2",
     "@types/jest": "^29.5.14",
     "@types/prompts": "^2.4.9",
     "eslint-plugin-jest": "^28.11.0",
     "jest": "^29.7.0",
     "prettier": "^3.5.3",
     "prompts": "^2.4.2",
-    "ts-jest": "^29.3.1",
+    "ts-jest": "^29.3.2",
     "tsx": "^4.19.3",
-    "turbo": "^2.5.0"
+    "turbo": "^2.5.2",
+    "@types/chalk": "^2.2.4",
+    "chalk": "^5.4.1"
   },
-  "packageManager": "pnpm@10.8.0",
+  "packageManager": "pnpm@10.9.0",
   "pnpm": {
     "overrides": {
-      "next": "^15.2.4"
+      "next": "^15.3.1"
     }
   },
   "dependencies": {

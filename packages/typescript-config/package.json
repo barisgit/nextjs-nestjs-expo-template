@@ -1,10 +1,11 @@
 {
   "name": "@repo/typescript-config",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "fullclean": "rm -rf node_modules"
+    "fullclean": "rm -rf node_modules",
+    "fullcleanwindows": "rd /s /q node_modules"
   },
   "files": [
     "base.json",

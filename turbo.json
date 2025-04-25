@@ -1,27 +1,20 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "globalEnv": [
-    "DB_HOST",
-    "DB_PORT",
-    "DB_USERNAME",
-    "DB_PASSWORD",
-    "DB_DATABASE",
-    "NODE_ENV",
-    "PORT",
-    "POSTHOG_API_KEY",
-    "POSTHOG_HOST"
-  ],
-  "ui": "stream",
+  "globalDependencies": ["**/.env", "**/.env.*"],
+  "globalEnv": [],
+  "globalPassThroughEnv": ["NODE_ENV"],
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "**/.env", "**/.env.*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {
       "dependsOn": ["^build"]
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
@@ -44,7 +37,14 @@
     "fullclean": {
       "cache": false
     },
+    "fullcleanwindows": {
+      "cache": false
+    },
     "type-check": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "check-types": {
       "dependsOn": ["^build"],
       "outputs": []
     }

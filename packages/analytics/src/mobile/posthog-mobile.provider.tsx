@@ -164,7 +164,7 @@ export const PostHogMobileProvider: React.FC<PostHogMobileProviderProps> = ({
             app: {
               version: Platform.Version,
               build: "0",
-              namespace: "com.footy.mastermind",
+              namespace: "com.turbo.template",
             },
             os: {
               name: Platform.OS,

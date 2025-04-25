@@ -60,26 +60,28 @@ cd nextjs-nestjs-expo-template
 # Install dependencies
 pnpm i # or pnpm install
 
-# Set up environment variables
-cp apps/backend/.env.example apps/backend/.env
-cp apps/web/.env.example apps/web/.env
-cp apps/mobile/.env.example apps/mobile/.env
+# Run the development setup script 
+# This command handles:
+#  - Copying .env files
+#  - Setting up database (Docker or manual)
+#  - Setting up Redis (Docker)
+#  - Running database migrations
+#  - Seeding the database
+pnpm dev:setup
 
-# Set up databases (be sure docker is running)
-pnpm db:setup
-pnpm redis:setup
-# or configure this manually and add to .env files
+# NOTE: Ensure Docker is running if you rely on the default Docker setup for PostgreSQL and Redis.
+# The script will prompt you for necessary details or use .env files if they exist.
 
-# Start development servers
+# Start all development servers (Backend, Web, Mobile)
 pnpm dev
 
-# or
-pnpm dev:backend # NestJS
-pnpm dev:web # Next.js
-pnpm dev:mobile # Expo
+# Or run individual servers:
+# pnpm dev:backend # NestJS
+# pnpm dev:web     # Next.js
+# pnpm dev:mobile  # Expo
 ```
 
-## 🔍 Project Structure
+## 📂 Project Structure
 
 ```text
 nextjs-nestjs-expo-template/
@@ -191,6 +193,25 @@ socket.on(ServerEvents.MESSAGE, (message) => {
   console.log('New message:', message);
 });
 ```
+
+## 🛠️ Development Scripts
+
+This project includes several helpful scripts for development and maintenance, located in the `scripts/` directory.
+
+### Environment Variable Inspection
+
+```bash
+pnpm inspect:envs
+```
+
+This command scans the `apps/` and `packages/` directories for all `.env*` files (e.g., `.env`, `.env.local`, `.env.example`). It then prints the key-value pairs found in each file, grouped by project (app or package).
+
+This is useful for:
+- Verifying that all necessary environment variables are present in example files.
+- Quickly checking the configured values across different environments.
+- Debugging environment-related issues.
+
+The script is powered by the `EnvManager` utility (`scripts/utilities/env-manager.ts`), which is designed to parse `.env` files while preserving comments and whitespace, making it useful for both reading and programmatically modifying environment configurations.
 
 ## 🤝 Contributing
 
